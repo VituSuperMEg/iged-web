@@ -27,7 +27,7 @@ export function Form(props: any) {
                 setVisibleBtns={props.setVisibleBtns}
               />
               {props.enableBtns && props.visibleBtns && (
-                <FormButtons {...props} handleSave={objects.handleSubmit} />
+                <FormButtons {...props} handleSave={objects.submitForm} />
               )}
             </form>
           )}

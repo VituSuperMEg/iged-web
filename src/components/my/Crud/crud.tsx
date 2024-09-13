@@ -50,6 +50,12 @@ export function Crud({
     );
   };
 
+  const handleSave = async (values: typeof emptyObject) => {
+    const res = await api.post(endPoint, values);
+    loadData();
+    setView("list");
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -93,7 +99,7 @@ export function Crud({
             handleDelete={handleDelete}
           />
         )}
-        {(view === "new" || view === "edit" )&& (
+        {(view === "new" || view === "edit") && (
           <Form
             FormWrapper={FormWrapper}
             validation={validationSchema}
@@ -103,6 +109,7 @@ export function Crud({
             visibleBtns={visibleBtns}
             handleNew={handleNew}
             enableBtns={true}
+            handleSubmit={handleSave}
             handleDelete={handleDelete}
             view={view}
           />
