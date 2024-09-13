@@ -6,6 +6,7 @@ import { api } from "@/services/api";
 import { Table } from "@/components/ui/table";
 import Grid from "./grid";
 import { Form } from "./form";
+import Message from "../core/messages";
 
 type CrudType = {
   endPoint: string;
@@ -26,6 +27,7 @@ export function Crud({
   const [view, setView] = useState("list");
   const [data, setData] = useState<(typeof emptyObject)[]>([]);
   const [dataObject, setDataObjecrt] = useState(emptyObject);
+  const [visibleBtns, setVisibleBtns] = useState(true);
 
   const loadData = async () => {
     const res = await api.get(endPoint);
@@ -34,7 +36,18 @@ export function Crud({
 
   const loadShow = async (item: typeof emptyObject) => {
     setDataObjecrt(item);
+    setView("edit");
+  };
+
+  const handleNew = () => {
+    setDataObjecrt(emptyObject);
     setView("new");
+  };
+
+  const handleDelete = async (id: number) => {
+    const res = await Message.confirmationReturn(
+      "Deseja realmente excluír este registro?"
+    );
   };
 
   useEffect(() => {
@@ -77,13 +90,21 @@ export function Crud({
             fields={fields}
             list={data}
             loadShow={loadShow}
+            handleDelete={handleDelete}
           />
         )}
-        {view === "new" && (
+        {(view === "new" || view === "edit" )&& (
           <Form
             FormWrapper={FormWrapper}
             validation={validationSchema}
             emptyObject={dataObject}
+            setView={setView}
+            setDataObjecrt={setDataObjecrt}
+            visibleBtns={visibleBtns}
+            handleNew={handleNew}
+            enableBtns={true}
+            handleDelete={handleDelete}
+            view={view}
           />
         )}
       </div>

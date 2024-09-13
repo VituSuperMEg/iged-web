@@ -1,15 +1,23 @@
 import { Crud } from "@/components/my/Crud/crud";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
-import { Field, Form, Formik } from "formik";
-import { number } from "yup";
+import { Field } from "formik";
 
 export function Orgaos() {
   return (
     <Crud
       displayName="Orgãos"
       emptyObject={{
+        alterado_em: "",
+        alterado_por: "",
+        ativo: "",
+        cnpj: "",
+        cod_orgao: "",
+        cod_unidade_orcamentaria: "",
+        criado_em: "",
+        criado_por: "",
+        descricao: "",
         id: "",
-        nome: "",
+        responsavel: "",
       }}
       fields={[
         {
