@@ -5,7 +5,7 @@ import { Field } from "formik";
 export function Orgaos() {
   return (
     <Crud
-      displayName="Orgãos"
+      displayName="Unidade Orcamentárias"
       emptyObject={{
         alterado_em: "",
         alterado_por: "",
@@ -94,7 +94,9 @@ export function Orgaos() {
         </div>
       )}
       validationSchema={(y) => {
-        return {};
+        return {
+          
+        };
       }}
       endPoint="/api/v1/unidade-orcamentaria"
     />

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { TooltipProvider } from "../ui/tooltip";
+import { Menu } from "@/pages/modules/_layout/menu";
 
 export function NavBar() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export function NavBar() {
             <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
             <span className="sr-only">Acme Inc</span>
           </Link>
+
           <Tooltip>
             <TooltipTrigger asChild>
               <button
@@ -50,6 +52,9 @@ export function NavBar() {
               Dasboard
             </TooltipContent>
           </Tooltip>
+
+          {/** Menu Accordion */}
+          <Menu />
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -57,7 +62,7 @@ export function NavBar() {
                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <FileStack className="h-5 w-5" />
-                <span className="sr-only">Orders</span>
+                <span className="sr-only">Caddastr</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent
@@ -65,23 +70,6 @@ export function NavBar() {
               className="bg-emerald-500 text-white p-1 text-sm rounded"
             >
               Documentos
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                to="orgaos"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Package className="h-5 w-5" />
-                <span className="sr-only">Orgãos</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent
-              side="right"
-              className="bg-emerald-500 text-white p-1 text-sm rounded"
-            >
-              Orgãos
             </TooltipContent>
           </Tooltip>
           <Tooltip>

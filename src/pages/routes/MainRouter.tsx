@@ -5,6 +5,7 @@ import { Documentos } from "../modules/digitalizacao/documentos";
 import { Dashboard } from "../modules/digitalizacao/dashborad";
 import { Configuracao } from "../modules/digitalizacao/configuracao";
 import { Orgaos } from "../modules/digitalizacao/orgaos";
+import { TiposDocumentos } from "../modules/digitalizacao/cadastros/tipo-documento";
 
 export function MainRouter() {
   return (
@@ -16,6 +17,7 @@ export function MainRouter() {
             <Route path="orders" element={<Documentos />} />
             <Route path="orgaos" element={<Orgaos />} />
             <Route path="configuracao" element={<Configuracao />} />
+            <Route path="tipos-documentos" element={<TiposDocumentos />} />
 
             {/* Adicione outras rotas aninhadas aqui */}
           </Route>
