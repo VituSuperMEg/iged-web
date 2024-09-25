@@ -1,11 +1,12 @@
 import { Crud } from "@/components/my/Crud/crud";
+import { Filter } from "@/components/my/forms/filter";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
 import { ErrorMessage, Field } from "formik";
 
-export function TiposDocumentos() {
+export function Setores() {
   return (
     <Crud
-      displayName="Tipo Documento"
+      displayName="Setores"
       emptyObject={{
         id: "",
         descricao: "",
@@ -36,16 +37,17 @@ export function TiposDocumentos() {
             width="w-[700px]"
             required
             component={LabelAndInput}
-            erros={<ErrorMessage name="descricao"/>}
+            erros={<ErrorMessage name="descricao" />}
           />
+          <Filter  width="w-[300px]" path="unidade-orcamentaria" label="Unidade Orcamentaria" />
         </div>
       )}
       validationSchema={(y) => {
         return {
-          descricao: y.string().required("Campo Obrigatório")
+          descricao: y.string().required("Campo Obrigatório"),
         };
       }}
-      endPoint="/api/v1/tipos-documentos"
+      endPoint="/api/v1/setores"
     />
   );
 }

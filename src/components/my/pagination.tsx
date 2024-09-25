@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 
 interface PaginationProps {
@@ -29,38 +30,82 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
+
+    if (totalPages <= 10) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(
+          <button
+            key={i}
+            onClick={() => handlePageClick(i)}
+            className={`px-3 py-1 mx-1 rounded ${
+              i === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
+            }`}
+          >
+            {i}
+          </button>
+        );
+      }
+    } else {
+      for (let i = 1; i <= 3; i++) {
+        pageNumbers.push(
+          <button
+            key={i}
+            onClick={() => handlePageClick(i)}
+            className={`px-3 py-1 mx-1 rounded ${
+              i === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
+            }`}
+          >
+            {i}
+          </button>
+        );
+      }
+      pageNumbers.push(<span key="ellipsis-1">...</span>);
+
+      // Add last pages
+      for (let i = totalPages - 2; i <= totalPages; i++) {
+        if (i > 3) {
+          pageNumbers.push(
+            <button
+              key={i}
+              onClick={() => handlePageClick(i)}
+              className={`px-3 py-1 mx-1 rounded ${
+                i === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
+              }`}
+            >
+              {i}
+            </button>
+          );
+        }
+      }
       pageNumbers.push(
         <button
-          key={i}
-          onClick={() => handlePageClick(i)}
+          key={totalPages}
+          onClick={() => handlePageClick(totalPages)}
           className={`px-3 py-1 mx-1 rounded ${
-            i === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
+            totalPages === currentPage
+              ? "bg-blue-500 text-white"
+              : "bg-gray-300"
           }`}
         >
-          {i}
+          {totalPages}
         </button>
       );
     }
+
     return pageNumbers;
   };
 
   return (
-    <div className="flex justify-center items-center mt-4">
-      <button
-        onClick={handlePrevious}
-        disabled={currentPage === 1}
-        className="px-3 py-1 bg-gray-300 rounded mx-1"
-      >
-        Previous
-      </button>
+    <div className="mt-4 flex items-center">
+      {currentPage > 1 && (
+        <button onClick={handlePrevious} disabled={currentPage === 1}>
+          <ArrowLeft />
+        </button>
+      )}
+
       {renderPageNumbers()}
-      <button
-        onClick={handleNext}
-        disabled={currentPage === totalPages}
-        className="px-3 py-1 bg-gray-300 rounded mx-1"
-      >
-        Next
+      <button onClick={handleNext} disabled={currentPage === totalPages}>
+        <ArrowRight />
       </button>
     </div>
   );

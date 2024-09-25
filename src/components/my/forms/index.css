@@ -1,8 +1,11 @@
 .filter {
   padding: 10px;
   height: auto;
+  width: 100%;
 }
 .filter input {
   outline: none;
+  width: 100%;
+
   background: none !important;
 }

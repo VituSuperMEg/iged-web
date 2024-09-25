@@ -7,6 +7,7 @@ import { Table } from "@/components/ui/table";
 import Grid from "./grid";
 import { Form } from "./form";
 import Message from "../core/messages";
+import Pagination from "../pagination";
 
 type CrudType = {
   endPoint: string;
@@ -15,6 +16,13 @@ type CrudType = {
   FormWrapper: any;
   validationSchema: any;
 } & IBreadcrumb;
+
+type PagationType = {
+  limit: number;
+  page: number;
+  total: number;
+  totalPages: number;
+};
 
 export function Crud({
   displayName,
@@ -28,12 +36,23 @@ export function Crud({
   const [data, setData] = useState<(typeof emptyObject)[]>([]);
   const [dataObject, setDataObjecrt] = useState(emptyObject);
   const [visibleBtns, setVisibleBtns] = useState(true);
-
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState<PagationType>({
+    limit: 0,
+    page: 1,
+    total: 0,
+    totalPages: 0,
+  });
   const loadData = async () => {
-    const res = await api.get(endPoint);
-    setData(res.data);
+    const res = await api.get(`${endPoint}/page?page=${page}`);
+    setData(res.data.data);
+    setPagination({
+      page: res.data.page,
+      total: res.data.total,
+      totalPages: res.data.totalPages,
+      limit: res.data.limit,
+    });
   };
-
   const loadShow = async (item: typeof emptyObject) => {
     setDataObjecrt(item);
     setView("edit");
@@ -51,14 +70,19 @@ export function Crud({
   };
 
   const handleSave = async (values: typeof emptyObject) => {
-    const res = await api.post(endPoint, values);
+    if (values.id) {
+      const res = await api.put(endPoint, values);
+    } else {
+      const res = await api.post(endPoint, values);
+    }
+
     loadData();
     setView("list");
   };
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [page]);
 
   return (
     <div className="w-full h-[800px]" style={{ marginTop: -20 }}>
@@ -91,14 +115,24 @@ export function Crud({
       </div>
       <div className="mt-16">
         {view === "list" && (
-          <Grid
-            enableBtnActions={true}
-            fields={fields}
-            list={data}
-            loadShow={loadShow}
-            handleDelete={handleDelete}
-          />
+          <>
+            <Grid
+              enableBtnActions={true}
+              fields={fields}
+              list={data}
+              loadShow={loadShow}
+              handleDelete={handleDelete}
+            />
+            {pagination.totalPages > 0 && (
+              <Pagination
+                currentPage={pagination.page}
+                onPageChange={(page) => setPage(page)}
+                totalPages={pagination.totalPages}
+              />
+            )}
+          </>
         )}
+
         {(view === "new" || view === "edit") && (
           <Form
             FormWrapper={FormWrapper}

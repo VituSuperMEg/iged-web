@@ -61,6 +61,11 @@ export const Menu = () => {
               label="Tipos Documentos"
               href="tipos-documentos"
             />
+            <MenuItem
+              Icon={Package}
+              label="Setores"
+              href="setores"
+            />
           </AccordionContent>
         </AccordionItem>
       </TooltipProvider>
