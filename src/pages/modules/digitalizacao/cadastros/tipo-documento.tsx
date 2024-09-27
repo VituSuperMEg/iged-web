@@ -20,13 +20,14 @@ export function TiposDocumentos() {
           name: "descricao",
         },
       ]}
-      FormWrapper={() => (
+      FormWrapper={(props) => (
         <div className="flex gap-2 flex-wrap max-w-full">
           <Field
             id="id"
             name="id"
             label="Código"
             disabled
+       
             component={LabelAndInput}
           />
           <Field
@@ -34,9 +35,10 @@ export function TiposDocumentos() {
             name="descricao"
             label="Descrição"
             width="w-[700px]"
+            autoFocus
             required
             component={LabelAndInput}
-            erros={<ErrorMessage name="descricao"/>}
+            messagesErros={props.errors.descricao}
           />
         </div>
       )}

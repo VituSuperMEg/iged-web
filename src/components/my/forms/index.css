@@ -9,3 +9,15 @@
 
   background: none !important;
 }
+.control {
+  width: 100% !important;
+  height: 100%;
+  outline: none;
+  padding-left: 10px;
+  background: none;
+}
+
+.control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
