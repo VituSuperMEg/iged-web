@@ -1,12 +1,20 @@
 .filter {
   padding: 10px;
-  height: auto;
+  height: auto; /* This allows the height to adjust based on content */
   width: 100%;
+  display: flex; /* Use flex to align items */
+  flex-direction: column; /* Stack items vertically */
 }
+
+.filter .label-container {
+  display: flex; /* Flex to align label and required asterisk */
+  align-items: center; /* Center vertically */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
 .filter input {
   outline: none;
   width: 100%;
-
   background: none !important;
 }
 .control {
@@ -16,7 +24,23 @@
   padding-left: 10px;
   background: none;
 }
+.control input {
+  outline: none;
+  width: 100%;
 
+  background: none !important;
+}
+.control .rbt-aux {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  font-size: 20px;
+  color: #858585;
+}
+.control .rbt-aux:hover {
+  transition: color .5s ease;
+  color: red;
+}
 .control:disabled {
   opacity: 0.5;
   cursor: not-allowed;

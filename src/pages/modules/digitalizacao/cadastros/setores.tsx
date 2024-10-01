@@ -10,6 +10,7 @@ export function Setores() {
       emptyObject={{
         id: "",
         descricao: "",
+        unidade_orcamentaria_id: ""
       }}
       fields={[
         {
@@ -39,7 +40,14 @@ export function Setores() {
             component={LabelAndInput}
             erros={<ErrorMessage name="descricao" />}
           />
-          <Filter  width="w-[300px]" path="unidade-orcamentaria" label="Unidade Orcamentaria" />
+          <Field 
+            id="unidade_orcamentaria_id"
+            name="unidade_orcamentaria_id"
+            width="w-[300px]"
+            path="unidade-orcamentaria"
+            label="Unidade Orcamentaria"
+            component={Filter}
+          />
         </div>
       )}
       validationSchema={(y) => {
