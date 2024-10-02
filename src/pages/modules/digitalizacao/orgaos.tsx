@@ -2,23 +2,24 @@ import { Crud } from "@/components/my/Crud/crud";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
 import { Field } from "formik";
 
+const emptyObejct = {
+  alterado_em: "",
+  alterado_por: "",
+  ativo: "",
+  cnpj: "",
+  cod_orgao: "",
+  cod_unidade_orcamentaria: "",
+  criado_em: "",
+  criado_por: "",
+  descricao: "",
+  id: "",
+  responsavel: "",
+};
 export function Orgaos() {
   return (
     <Crud
       displayName="Unidade Orcamentárias"
-      emptyObject={{
-        alterado_em: "",
-        alterado_por: "",
-        ativo: "",
-        cnpj: "",
-        cod_orgao: "",
-        cod_unidade_orcamentaria: "",
-        criado_em: "",
-        criado_por: "",
-        descricao: "",
-        id: "",
-        responsavel: "",
-      }}
+      emptyObject={emptyObejct}
       fields={[
         {
           label: "Código",
@@ -93,10 +94,8 @@ export function Orgaos() {
           />
         </div>
       )}
-      validationSchema={(y) => {
-        return {
-          
-        };
+      validationSchema={() => {
+        return {};
       }}
       endPoint="/api/v1/unidade-orcamentaria"
     />

@@ -3,7 +3,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
@@ -12,7 +11,7 @@ export interface IBreadcrumb {
   displayName: string;
 }
 
-export function BreadCrumb({ displayName, path }: IBreadcrumb) {
+export function BreadCrumb({ displayName }: IBreadcrumb) {
   return (
     <Breadcrumb
       className="hidden md:flex"

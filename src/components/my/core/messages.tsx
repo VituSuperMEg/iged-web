@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import Swal, { SweetAlertIcon } from "sweetalert2"; // Importando o tipo SweetAlertIcon
 
 type MessageType = {
   e: string;
@@ -8,21 +8,21 @@ type MessageType = {
 const Message = {
   success: (msg = "Registros Salvo com Sucesso.") => {
     Swal.fire({
-      icon: "success",
+      icon: "success" as SweetAlertIcon, // Garantindo que o tipo seja correto
       title: "Sucesso",
       text: msg,
     });
   },
   error: ({ e, title = "Atenção" }: MessageType) => {
     Swal.fire({
-      icon: "error",
+      icon: "error" as SweetAlertIcon, // Garantindo que o tipo seja correto
       title: title,
       text: e,
     });
   },
   info: ({ e }: MessageType) => {
     Swal.fire({
-      icon: "info",
+      icon: "info" as SweetAlertIcon, // Garantindo que o tipo seja correto
       title: "Oops",
       text: e,
     });
@@ -30,7 +30,7 @@ const Message = {
   confirmation: async (
     msg = "Deseja excluir este registro?",
     title = "Exclusão",
-    icon = "warning",
+    icon: SweetAlertIcon = "warning", // Definindo o tipo corretamente
     showCancelButton = true,
     confirmationText = "Sim"
   ) => {
@@ -38,8 +38,8 @@ const Message = {
     await Swal.fire({
       title,
       text: msg,
-      icon: icon,
-      showCancelButton: showCancelButton,
+      icon,
+      showCancelButton,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       cancelButtonText: "Não!",
@@ -55,7 +55,7 @@ const Message = {
   confirmationReturn: async (
     msg = "Deseja excluir este registro?",
     title = "Exclusão",
-    icon = "warning",
+    icon: SweetAlertIcon = "warning", // Definindo o tipo corretamente
     confirmationText = "Sim!",
     cancelText = "Não!"
   ) => {
@@ -63,7 +63,7 @@ const Message = {
     await Swal.fire({
       title,
       text: msg,
-      icon: icon,
+      icon,
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -79,10 +79,10 @@ const Message = {
 
   confirmationErrorDialog: async (msg = null) => {
     let res = false;
-    Swal.fire({
+    await Swal.fire({
       title: "Sessão",
       text: msg,
-      icon: "warning",
+      icon: "warning" as SweetAlertIcon, // Garantindo que o tipo seja correto
       confirmButtonColor: "#3085d6",
       confirmButtonText: "OK",
     }).then((result) => {
@@ -91,22 +91,24 @@ const Message = {
       }
       return res;
     });
+    return res;
   },
 
-  confirmationErrorDialogCallback: async (msg = null, callback) => {
-    let res = false;
+  confirmationErrorDialogCallback: async (msg = null, callback: () => void) => {
+    const res = false;
     await Swal.fire({
       title: "Sessão",
       text: msg,
-      icon: "warning",
+      icon: "warning" as SweetAlertIcon, 
       confirmButtonColor: "#3085d6",
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.value) {
         callback();
       }
-      callback();
     });
+    return res;
   },
 };
+
 export default Message;

@@ -1,4 +1,3 @@
-import { Filter } from "@/components/my/forms/filter";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
 import { Separator } from "@/components/ui/separator";
 import { Formik, Form, Field } from "formik";
@@ -8,8 +7,8 @@ export function Documentos() {
     <div className="flex flex-col max-w-full">
       <h6>Pesquisa</h6>
       <Separator className="bg-zinc-200 w-full h-[0.1px] mt-2" />
-      <Formik>
-        {({ handleChange }) => (
+      <Formik initialValues={{ num: "" }} onSubmit={() => {}}>
+        {({}) => (
           <Form className="mt-6 flex-wrap flex gap-10">
             <Field
               label="Núm. do processo"
@@ -26,12 +25,6 @@ export function Documentos() {
               component={LabelAndInput}
               width="w-52"
               type="date"
-            />
-            <Filter
-              label="Credores"
-              id="credor_id"
-              width="w-[350px]"
-              required
             />
           </Form>
         )}

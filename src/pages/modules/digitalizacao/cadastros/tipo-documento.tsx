@@ -1,6 +1,6 @@
 import { Crud } from "@/components/my/Crud/crud";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
-import { ErrorMessage, Field } from "formik";
+import { Field } from "formik";
 
 export function TiposDocumentos() {
   return (
@@ -20,7 +20,7 @@ export function TiposDocumentos() {
           name: "descricao",
         },
       ]}
-      FormWrapper={(props) => (
+      FormWrapper={(props : any) => (
         <div className="flex gap-2 flex-wrap max-w-full">
           <Field
             id="id"
@@ -42,7 +42,7 @@ export function TiposDocumentos() {
           />
         </div>
       )}
-      validationSchema={(y) => {
+      validationSchema={(y: any) => {
         return {
           descricao: y.string().required("Campo Obrigatório")
         };

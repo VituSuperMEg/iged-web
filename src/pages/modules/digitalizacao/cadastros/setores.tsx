@@ -50,7 +50,7 @@ export function Setores() {
           />
         </div>
       )}
-      validationSchema={(y) => {
+      validationSchema={(y: any) => {
         return {
           descricao: y.string().required("Campo Obrigatório"),
         };

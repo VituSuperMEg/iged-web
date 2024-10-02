@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input";
 import { Link, Outlet } from "react-router-dom";
 import { NavBar } from "@/components/my/navbar";
 import { NavBarResponsive } from "@/components/my/navbar-responsive";
-import { BreadCrumb } from "@/components/my/breadcrumb";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function Dashboard() {

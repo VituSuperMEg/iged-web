@@ -1,4 +1,3 @@
-import { TooltipProvider } from "./components/ui/tooltip";
 import { MainRouter } from "./pages/routes/MainRouter";
 
 export function App() {

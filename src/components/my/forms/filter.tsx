@@ -17,11 +17,11 @@ type FilterType = {
 
 const List = ({ value }) => {
   return (
-    <div className="bg-white shadow-lg p-2 rounded-sm flex flex-col gap-2">
-      <div
-        key={value.id}
-        className="border-l-emerald-500 border h-[60px] p-2 flex flex-col"
-      >
+    <div
+      className="bg-white shadow-lg p-2 rounded-sm flex flex-col gap-2"
+      key={value.id}
+    >
+      <div className="border-l-emerald-500 border h-[60px] p-2 flex flex-col">
         <section>
           <strong style={{ fontSize: 10 }}>Id:</strong>
           <span style={{ fontSize: 10 }}> {value.id}</span>
@@ -46,20 +46,33 @@ export function Filter({
   required = false,
 }: FilterType) {
   const [data, setData] = useState([]);
-  const [item, setItem] = useState(0);
-
-  useEffect(() => {
-    if (form.values[id]) setItem(form.values[id]);
-  }, [form]);
+  const [item, setItem] = useState(null);
 
   const loadData = async () => {
     const res = await api.get(`/api/v1/${path}/options`);
     setData(res.data);
   };
 
+  const loadFind = async () => {
+    if (form.values[id]) {
+      const res = await api.get(`/api/v1/${path}/find?id=${form.values[id]}`);
+      if (res.data) {
+        setItem(res.data);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (form?.values[id]) {
+      loadFind();
+    }
+  }, [form?.values[id], path]);
+
   useEffect(() => {
     loadData();
   }, []);
+
+  const filterBy = () => true;
 
   return (
     <div className="grid gap-2 mt-[1px]">
@@ -72,19 +85,31 @@ export function Filter({
         style={{ marginTop: -15 }}
       >
         <AsyncTypeahead
-          className="control pr-2"
-          labelKey="descricao"
+          id="custom"
           onSearch={(e) => console.log(e)}
+          className="control pr-2"
+          labelKey={"descricao"}
           isLoading={false}
           options={data}
           placeholder="Digite o nome ou código.."
           useCache={false}
           clearButton
+          defaultSelected={item ? [item] : []}
           renderMenuItemChildren={(otp) => <List value={otp} />}
           minLength={0}
+          filterBy={filterBy}
           dropup={false}
+          promptText="Nenhum Resultado..."
+          emptyLabel="Nenhum resultado..."
           onChange={(event) => {
-            form.setFieldValue(id, event[0][primaryKey]);
+            if (event && event.length > 0) {
+              const selectedItem = event[0];
+              if (selectedItem[primaryKey]) {
+                form.setFieldValue(field.name, selectedItem[primaryKey]);
+              }
+            } else {
+              form.setFieldValue(field.name, ""); // Use field.name to clear the correct field
+            }
           }}
         />
       </div>

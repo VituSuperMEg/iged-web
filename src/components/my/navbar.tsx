@@ -7,7 +7,6 @@ import {
   FileStack,
   Home,
   LineChart,
-  Package,
   Package2,
   Settings,
   Users2,
