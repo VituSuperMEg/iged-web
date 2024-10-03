@@ -1,8 +1,15 @@
 import { Label } from "@/components/ui/label";
-import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import { AsyncTypeahead } from "react-bootstrap-typeahead"; // Removendo TypeaheadModel
 import "./index.css";
 import { useEffect, useState } from "react";
 import { api } from "@/services/api";
+
+// Definir o tipo das opções
+type OptionType = {
+  id: string;
+  descricao: string;
+  [key: string]: any; // Caso hajam outros campos dinâmicos
+};
 
 type FilterType = {
   label: string;
@@ -12,10 +19,10 @@ type FilterType = {
   path: string;
   field: any;
   form: any;
-  primaryKey: string;
+  primaryKey: keyof OptionType; // Assegurando que primaryKey seja uma chave de OptionType
 };
 
-const List = ({ value }) => {
+const List = ({ value }: { value: OptionType }) => {
   return (
     <div
       className="bg-white shadow-lg p-2 rounded-sm flex flex-col gap-2"
@@ -42,11 +49,11 @@ export function Filter({
   id,
   width = "w-[300px]",
   path,
-  primaryKey = "id",
+  primaryKey = "id", // Isso assegura que "primaryKey" seja uma chave válida em OptionType
   required = false,
 }: FilterType) {
-  const [data, setData] = useState([]);
-  const [item, setItem] = useState(null);
+  const [data, setData] = useState<OptionType[]>([]); // Tipagem para as opções
+  const [item, setItem] = useState<OptionType | null>(null); // Tipagem para o item selecionado
 
   const loadData = async () => {
     const res = await api.get(`/api/v1/${path}/options`);
@@ -88,27 +95,32 @@ export function Filter({
           id="custom"
           onSearch={(e) => console.log(e)}
           className="control pr-2"
-          labelKey={"descricao"}
+          labelKey="descricao"
           isLoading={false}
           options={data}
           placeholder="Digite o nome ou código.."
           useCache={false}
           clearButton
           defaultSelected={item ? [item] : []}
-          renderMenuItemChildren={(otp) => <List value={otp} />}
+          renderMenuItemChildren={(option: any) => {
+            if (typeof option === "object" && option !== null) {
+              return <List value={option as OptionType} />;
+            }
+            return <div>{option}</div>; // Caso seja string, apenas exibe
+          }}
           minLength={0}
           filterBy={filterBy}
           dropup={false}
           promptText="Nenhum Resultado..."
           emptyLabel="Nenhum resultado..."
-          onChange={(event) => {
-            if (event && event.length > 0) {
-              const selectedItem = event[0];
+          onChange={(selected) => {
+            if (selected && selected.length > 0) {
+              const selectedItem = selected[0] as OptionType; // Garantindo que o item selecionado é do tipo OptionType
               if (selectedItem[primaryKey]) {
                 form.setFieldValue(field.name, selectedItem[primaryKey]);
               }
             } else {
-              form.setFieldValue(field.name, ""); // Use field.name to clear the correct field
+              form.setFieldValue(field.name, "");
             }
           }}
         />

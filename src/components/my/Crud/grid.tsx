@@ -1,6 +1,32 @@
 import { Edit, Trash } from "lucide-react";
 
-export default function Grid({ list, fields, enableBtnActions, loadShow }) {
+// Tipagem para cada campo
+type Field = {
+  name: string;
+  label: string;
+  classHead?: string;
+  classBody?: string;
+};
+
+// Tipagem para o item da lista
+type ListItem = {
+  [key: string]: any;
+};
+
+// Tipagem para as propriedades do componente
+type GridProps = {
+  list: ListItem[]; // Lista de itens, que é um array de objetos
+  fields: Field[]; // Campos que descrevem as colunas
+  enableBtnActions?: boolean; // Indica se os botões de ação estão habilitados
+  loadShow: (item: ListItem) => void; // Função para carregar um item ao clicar no botão de edição
+};
+
+export default function Grid({
+  list,
+  fields,
+  enableBtnActions = false,
+  loadShow,
+}: GridProps) {
   return (
     <div className="">
       <table className="min-w-full table-auto">

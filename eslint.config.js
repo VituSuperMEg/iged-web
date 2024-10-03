@@ -23,7 +23,8 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      'no-unused-vars': 'off', // Desativa a regra padrão do ESLint
+      'no-unused-vars': 'off', 
+      
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], 
     },
   },

@@ -77,12 +77,12 @@ const Message = {
     return res;
   },
 
-  confirmationErrorDialog: async (msg = null) => {
+  confirmationErrorDialog: async (msg: string) => {
     let res = false;
     await Swal.fire({
       title: "Sessão",
-      text: msg,
-      icon: "warning" as SweetAlertIcon, // Garantindo que o tipo seja correto
+      text: msg || "", // Verifica se a mensagem é `null` ou `undefined` e define uma string vazia se for o caso
+      icon: "warning" as SweetAlertIcon, 
       confirmButtonColor: "#3085d6",
       confirmButtonText: "OK",
     }).then((result) => {
@@ -94,11 +94,11 @@ const Message = {
     return res;
   },
 
-  confirmationErrorDialogCallback: async (msg = null, callback: () => void) => {
+  confirmationErrorDialogCallback: async (msg: string | null = null, callback: () => void) => {
     const res = false;
     await Swal.fire({
       title: "Sessão",
-      text: msg,
+      text: msg || "", // Substitui `null` por uma string vazia
       icon: "warning" as SweetAlertIcon, 
       confirmButtonColor: "#3085d6",
       confirmButtonText: "OK",

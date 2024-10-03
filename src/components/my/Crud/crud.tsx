@@ -1,23 +1,28 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BreadCrumb, IBreadcrumb } from "../breadcrumb";
 import { Button } from "../Button";
 import { Plus, Search } from "lucide-react";
 import { api } from "@/services/api";
-import { Table } from "@/components/ui/table";
-import Grid from "./grid";
 import { Form } from "./form";
-import Message from "../core/messages";
+import Grid from "./grid";
 import Pagination from "../pagination";
+
+type Field = {
+  name: string;
+  label: string;
+  classHead?: string;
+  classBody?: string;
+};
 
 type CrudType = {
   endPoint: string;
-  emptyObject: object;
-  fields: any;
-  FormWrapper: any;
-  validationSchema: any;
-} & IBreadcrumb;
+  emptyObject: Record<string, any>; // Objeto dinâmico para os dados
+  fields: Field[]; // Array de campos para a grid
+  FormWrapper: React.FC<any>; // Wrapper do formulário, tipado como componente React
+  validationSchema: any; // Pode ser uma schema Yup ou outra
+} & IBreadcrumb; // Herda IBreadcrumb para breadcrumbs
 
-type PagationType = {
+type PaginationType = {
   limit: number;
   page: number;
   total: number;
@@ -32,17 +37,19 @@ export function Crud({
   FormWrapper,
   validationSchema,
 }: CrudType) {
-  const [view, setView] = useState("list");
+  const [view, setView] = useState<"list" | "new" | "edit">("list");
   const [data, setData] = useState<(typeof emptyObject)[]>([]);
-  const [dataObject, setDataObjecrt] = useState(emptyObject);
-  const [visibleBtns, setVisibleBtns] = useState(true);
-  const [page, setPage] = useState(1);
-  const [pagination, setPagination] = useState<PagationType>({
+  const [dataObject, setDataObjecrt] =
+    useState<typeof emptyObject>(emptyObject);
+  const visibleBtns = true;
+  const [page, setPage] = useState<number>(1);
+  const [pagination, setPagination] = useState<PaginationType>({
     limit: 0,
     page: 1,
     total: 0,
     totalPages: 0,
   });
+
   const loadData = async () => {
     const res = await api.get(`${endPoint}/page?page=${page}`);
     setData(res.data.data);
@@ -53,6 +60,7 @@ export function Crud({
       limit: res.data.limit,
     });
   };
+
   const loadShow = async (item: typeof emptyObject) => {
     setDataObjecrt(item);
     setView("edit");
@@ -63,17 +71,11 @@ export function Crud({
     setView("new");
   };
 
-  const handleDelete = async (id: number) => {
-    const res = await Message.confirmationReturn(
-      "Deseja realmente excluír este registro?"
-    );
-  };
-
   const handleSave = async (values: typeof emptyObject) => {
     if (values.id) {
-      const res = await api.put(endPoint, values);
+      await api.put(endPoint, values);
     } else {
-      const res = await api.post(endPoint, values);
+      await api.post(endPoint, values);
     }
 
     loadData();
@@ -95,10 +97,7 @@ export function Crud({
               label="Novo"
               variant="success"
               icon={<Plus size={15} />}
-              onClick={() => {
-                setView("new");
-                setDataObjecrt(emptyObject);
-              }}
+              onClick={handleNew}
             />
           ) : (
             <Button
@@ -121,7 +120,6 @@ export function Crud({
               fields={fields}
               list={data}
               loadShow={loadShow}
-              handleDelete={handleDelete}
             />
             {pagination.totalPages > 0 && (
               <Pagination
@@ -144,7 +142,6 @@ export function Crud({
             handleNew={handleNew}
             enableBtns={true}
             handleSubmit={handleSave}
-            handleDelete={handleDelete}
             view={view}
           />
         )}

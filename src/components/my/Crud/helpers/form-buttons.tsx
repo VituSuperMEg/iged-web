@@ -1,6 +1,3 @@
-import { Save, Trash } from "lucide-react";
-import React, { useState } from "react";
-
 export default function FormButtons(props: any) {
   const { emptyObject } = props;
   return (
