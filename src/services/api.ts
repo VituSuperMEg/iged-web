@@ -6,7 +6,8 @@ const getToken = () => {
 };
 
 export const api = axios.create({
-  baseURL: "http://localhost:3333",
+  baseURL: "https://api-digitalizacao-nest.vercel.app/",
+  // baseURL: "http://localhost:3333",
   headers: {
     "x-cliente-id": "0",
   },
@@ -14,10 +15,10 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = getToken(); 
+    const token = getToken();
 
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`; 
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
 
     return config;
