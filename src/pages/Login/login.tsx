@@ -1,6 +1,5 @@
 import { Button } from "@/components/my/Button";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
-
 import {
   Card,
   CardContent,
@@ -8,12 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { api } from "@/services/api";
 import useAuthStore from "@/store/useAuth";
 import { Field, Form, Formik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as y from "yup";
 
 const LoginSchema = y.object().shape({
