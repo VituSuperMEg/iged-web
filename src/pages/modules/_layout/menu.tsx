@@ -1,9 +1,3 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@radix-ui/react-tooltip";
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 import { File, Package, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -22,53 +16,51 @@ type MenuItemType = {
 
 export const MenuItem = ({ Icon, label, href }: MenuItemType) => {
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Link
-          to={href}
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-        >
-          <Icon className="h-5 w-5" />
-          <span className="sr-only">{label}</span>
-        </Link>
-      </TooltipTrigger>
-      <TooltipContent
-        side="right"
-        className="bg-emerald-500 text-white p-1 text-sm rounded"
-      >
-        {label}
-      </TooltipContent>
-    </Tooltip>
+    <>
+      <Link to={href} className="flex gap-2 mt-1 mb-1">
+        <Icon className="h-5 w-5" />
+        <span className="">{label}</span>
+      </Link>
+      <br />
+      <hr />
+      <br />
+    </>
   );
 };
 
 export const Menu = () => {
   return (
     <Accordion type="single" collapsible>
-      <TooltipProvider>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <Plus />
-          </AccordionTrigger>
-          <AccordionContent>
-            <MenuItem
-              Icon={Package}
-              label="Unidade Orcamentárias"
-              href="orgaos"
-            />
-            <MenuItem
-              Icon={File}
-              label="Tipos Documentos"
-              href="tipos-documentos"
-            />
-            <MenuItem
-              Icon={Package}
-              label="Setores"
-              href="setores"
-            />
-          </AccordionContent>
-        </AccordionItem>
-      </TooltipProvider>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>
+          <div className="flex gap-2 items-end">
+            <Plus /> <span>Cadastros</span>
+          </div>
+        </AccordionTrigger>
+        <AccordionContent>
+          <MenuItem
+            Icon={Package}
+            label="Unidade Orcamentárias"
+            href="orgaos"
+          />
+          <MenuItem
+            Icon={File}
+            label="Tipos Documentos"
+            href="tipos-documentos"
+          />
+          <MenuItem Icon={Package} label="Setores" href="setores" />
+        </AccordionContent>
+      </AccordionItem>
+      <hr />
+      <AccordionItem value="item-2">
+        <AccordionTrigger>
+          <div className="flex gap-2 items-end">
+            <Package /> <span>Documentos</span>
+          </div>
+        </AccordionTrigger>
+        <AccordionContent>
+        </AccordionContent>
+      </AccordionItem>
     </Accordion>
   );
 };

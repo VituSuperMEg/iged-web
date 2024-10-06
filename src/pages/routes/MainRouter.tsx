@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Login } from "../Login/login";
 import { AuthProvider } from "@/context/AuthProvider";
 import { Documentos } from "../modules/digitalizacao/documentos";
-import { Dashboard } from "../modules/digitalizacao/dashborad";
 import { Configuracao } from "../modules/digitalizacao/configuracao";
 import { Orgaos } from "../modules/digitalizacao/orgaos";
 import { TiposDocumentos } from "../modules/digitalizacao/cadastros/tipo-documento";
 import { Setores } from "../modules/digitalizacao/cadastros/setores";
+import { Dashboard } from "../modules/_layout/layout";
 
 export function MainRouter() {
   return (
