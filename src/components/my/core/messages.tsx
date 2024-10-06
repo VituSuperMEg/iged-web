@@ -15,7 +15,7 @@ const Message = {
   },
   error: ({ e, title = "Atenção" }: MessageType) => {
     Swal.fire({
-      icon: "error" as SweetAlertIcon, // Garantindo que o tipo seja correto
+      icon: "error" as SweetAlertIcon, 
       title: title,
       text: e,
     });

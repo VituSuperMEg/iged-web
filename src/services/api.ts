@@ -1,3 +1,4 @@
+import Message from "@/components/my/core/messages";
 import axios from "axios";
 
 const getToken = () => {
@@ -23,7 +24,19 @@ api.interceptors.request.use(
 
     return config;
   },
+
   (error) => {
+    Message.error({ e: error });
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    Message.error({ e: error.response.data.error });
     return Promise.reject(error);
   }
 );

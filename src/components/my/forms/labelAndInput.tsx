@@ -3,6 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { InputHTMLAttributes, useState } from "react";
 import { FieldProps } from "formik";
 import "./index.css";
+import { Button } from "../Button";
 
 type LabelAndInputType = FieldProps & {
   label: string;
@@ -44,22 +45,23 @@ export function LabelAndInput({
           {...field}
           id={id}
           className="control"
-          type={type === "password" && !showPassword ? "password" : type}
+          type={type === "password" && !showPassword ? "text" : type}
           autoFocus={autoFocus}
           disabled={rest.disabled}
           // {...rest}
         />
         {type === "password" && (
-          <div
+          <button
+            type="button"
             onClick={togglePasswordVisibility}
             className="absolute right-3 cursor-pointer"
           >
             {showPassword ? (
-              <EyeOff className="text-zinc-300" />
+              <EyeOff className="" />
             ) : (
-              <Eye className="text-zinc-300" />
+              <Eye className="" />
             )}
-          </div>
+          </button>
         )}
       </div>
       <div className="h-4">
