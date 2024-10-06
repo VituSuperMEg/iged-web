@@ -3,7 +3,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { InputHTMLAttributes, useState } from "react";
 import { FieldProps } from "formik";
 import "./index.css";
-import { Button } from "../Button";
 
 type LabelAndInputType = FieldProps & {
   label: string;
