@@ -1,6 +1,6 @@
 import { Crud } from "@/components/my/Crud/crud";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 
 const emptyObejct = {
   alterado_em: "",
@@ -59,6 +59,7 @@ export function Orgaos() {
             width="w-[850px]"
             required="required"
             component={LabelAndInput}
+            messagesErros={<ErrorMessage name="descricao" />}
           />
           <Field
             id="cnpj"
@@ -67,6 +68,7 @@ export function Orgaos() {
             width="w-[200px]"
             required="required"
             component={LabelAndInput}
+            messagesErros={<ErrorMessage name="cnpj" />}
           />
           <Field
             id="responsavel"
@@ -75,6 +77,7 @@ export function Orgaos() {
             width="w-[350px]"
             required="required"
             component={LabelAndInput}
+            messagesErros={<ErrorMessage name="responsavel" />}
           />
           <Field
             id="cod_orgao"
@@ -83,6 +86,7 @@ export function Orgaos() {
             width="w-[140px]"
             required="required"
             component={LabelAndInput}
+            messagesErros={<ErrorMessage name="cod_orgao" />}
           />
           <Field
             id="cod_unidade_orcamentaria"
@@ -91,11 +95,18 @@ export function Orgaos() {
             width="w-[180px]"
             required="required"
             component={LabelAndInput}
+            messagesErros={<ErrorMessage name="cod_unidade_orcamentaria" />}
           />
         </div>
       )}
-      validationSchema={() => {
-        return {};
+      validationSchema={(y: any) => {
+        return {
+          descricao: y.string().required("Campo Obrigatório"),
+          cnpj: y.string().required("Campo Obrigatório"),
+          responsavel: y.string().required("Campo Obrigatório"),
+          cod_orgao: y.number().required("Campo Obrigatório"),
+          cod_unidade_orcamentaria: y.number().required("Campo Obrigatório"),
+        };
       }}
       endPoint="/api/v1/unidade-orcamentaria"
     />

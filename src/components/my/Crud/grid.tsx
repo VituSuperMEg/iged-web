@@ -1,3 +1,9 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Edit, Trash } from "lucide-react";
 
 // Tipagem para cada campo
@@ -73,12 +79,31 @@ export default function Grid({
                 ))}
                 {enableBtnActions && (
                   <td className="px-4 py-2 text-right flex justify-end items-center">
-                    <Edit
-                      className="cursor-pointer text-emerald-500"
-                      size={20}
-                      onClick={() => loadShow(item)}
-                    />
-                    <Trash className="cursor-pointer text-red-500" size={20} />
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Edit
+                            className="cursor-pointer text-emerald-500"
+                            size={20}
+                            onClick={() => loadShow(item)}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-zinc-900 text-white rounded">
+                          Editar
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Trash
+                            className="cursor-pointer text-red-500"
+                            size={20}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-zinc-900 text-white rounded">
+                          Excluir
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </td>
                 )}
               </tr>

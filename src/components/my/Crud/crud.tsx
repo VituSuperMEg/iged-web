@@ -93,7 +93,7 @@ export function Crud({
         <div className="flex justify-end">
           {view === "list" ? (
             <Button
-              className="bg-zinc-700 rounded flex gap-2"
+              className="bg-zinc-700 rounded flex gap-2 mt-2"
               label="Novo"
               variant="success"
               icon={<Plus size={15} />}
@@ -101,7 +101,7 @@ export function Crud({
             />
           ) : (
             <Button
-              className="bg-zinc-700 rounded flex gap-2"
+              className="bg-zinc-700 rounded flex gap-2  mt-2"
               label="Buscar"
               variant="success"
               onClick={() => setView("list")}
@@ -122,11 +122,16 @@ export function Crud({
               loadShow={loadShow}
             />
             {pagination.totalPages > 0 && (
-              <Pagination
-                currentPage={pagination.page}
-                onPageChange={(page) => setPage(page)}
-                totalPages={pagination.totalPages}
-              />
+              <>
+                <Pagination
+                  currentPage={pagination.page}
+                  onPageChange={(page) => setPage(page)}
+                  totalPages={pagination.totalPages}
+                />
+                <span className="text-zinc-400">
+                  Mostrando {pagination.page} de {pagination.totalPages}
+                </span>
+              </>
             )}
           </>
         )}

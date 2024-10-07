@@ -1,4 +1,3 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 
 interface PaginationProps {
@@ -12,17 +11,6 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
-    }
-  };
 
   const handlePageClick = (page: number) => {
     onPageChange(page);
@@ -37,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <button
             key={i}
             onClick={() => handlePageClick(i)}
-            className={`px-3 py-1 mx-1 rounded ${
+            className={`px-3 py-1 mx-1 rounded-full ${
               i === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
             }`}
           >
@@ -51,7 +39,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <button
             key={i}
             onClick={() => handlePageClick(i)}
-            className={`px-3 py-1 mx-1 rounded ${
+            className={`px-3 py-1 mx-1 rounded-full ${
               i === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
             }`}
           >
@@ -68,7 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               key={i}
               onClick={() => handlePageClick(i)}
-              className={`px-3 py-1 mx-1 rounded ${
+              className={`px-3 py-1 mx-1 rounded-full ${
                 i === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
               }`}
             >
@@ -81,7 +69,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={totalPages}
           onClick={() => handlePageClick(totalPages)}
-          className={`px-3 py-1 mx-1 rounded ${
+          className={`px-3 py-1 mx-1 rounded-full ${
             totalPages === currentPage
               ? "bg-blue-500 text-white"
               : "bg-gray-300"
@@ -97,16 +85,16 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div className="mt-4 flex items-center">
-      {currentPage > 1 && (
+      {/* {currentPage > 1 && (
         <button onClick={handlePrevious} disabled={currentPage === 1}>
           <ArrowLeft />
         </button>
-      )}
+      )} */}
 
       {renderPageNumbers()}
-      <button onClick={handleNext} disabled={currentPage === totalPages}>
+      {/* <button onClick={handleNext} disabled={currentPage === totalPages}>
         <ArrowRight />
-      </button>
+      </button> */}
     </div>
   );
 };

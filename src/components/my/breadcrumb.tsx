@@ -5,6 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export interface IBreadcrumb {
@@ -22,7 +23,9 @@ export function BreadCrumb({ displayName }: IBreadcrumb) {
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard">
+              <Home size={20} />
+            </Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

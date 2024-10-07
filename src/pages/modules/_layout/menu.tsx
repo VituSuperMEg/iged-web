@@ -1,4 +1,3 @@
-
 import { File, Package, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -14,16 +13,16 @@ type MenuItemType = {
   href: string;
 };
 
-export const MenuItem = ({ Icon, label, href }: MenuItemType) => {
+export const MenuItem = ({ label, href }: MenuItemType) => {
   return (
     <>
-      <Link to={href} className="flex gap-2 mt-1 mb-1">
-        <Icon className="h-5 w-5" />
-        <span className="">{label}</span>
+      <Link
+        to={href}
+        className="flex gap-2 border-b h-10 border-zinc-50 hover:bg-zinc-300 items-center pl-1 rounded"
+      >
+        {/* <Icon className="h-5 w-5" /> */}
+        <span className="text-zinc-500">{label}</span>
       </Link>
-      <br />
-      <hr />
-      <br />
     </>
   );
 };
@@ -58,8 +57,7 @@ export const Menu = () => {
             <Package /> <span>Documentos</span>
           </div>
         </AccordionTrigger>
-        <AccordionContent>
-        </AccordionContent>
+        <AccordionContent></AccordionContent>
       </AccordionItem>
     </Accordion>
   );
