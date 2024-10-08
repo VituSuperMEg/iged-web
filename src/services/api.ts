@@ -11,8 +11,7 @@ const getToken = () => {
 export type ApiMethods = "get" | "post" | "put" | "delete" | "patch";
 
 export const api = axios.create({
-  // baseURL: "https://api-digitalizacao-nest.vercel.app/",
-  baseURL: "http://localhost:3333",
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "x-cliente-id": "0",
   },

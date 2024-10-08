@@ -48,8 +48,8 @@ export function Combobox({
   messagesErros
 }: ComboBoxType) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-  const [data, setData] = React.useState<DataType[]>([]);
+  const [value, setValue] = React.useState(""); 
+  const [data, setData] = React.useState<DataType[]>([]); 
   const [item, setItem] = React.useState<DataType | null>(null);
 
   const loadData = async () => {
@@ -60,10 +60,9 @@ export function Combobox({
   const loadFind = async () => {
     if (form.values[id]) {
       const res = await api.get(`/api/v1/${path}/find?id=${form.values[id]}`);
-      console.log(res.data);
       if (res.data) {
+        setValue(res.data.descricao); 
         setItem(res.data);
-        setValue(res.data.descricao);
       }
     }
   };
@@ -81,7 +80,7 @@ export function Combobox({
   return (
     <div className={`mt-2 ${width}`}>
       <div className="flex items-center">
-        <Label htmlFor={"teste"}>{label}</Label>
+        <Label htmlFor={id}>{label}</Label>
         {required && <span className="text-red-500 ml-1">*</span>}
       </div>
       <Popover open={open} onOpenChange={setOpen}>
@@ -97,7 +96,7 @@ export function Combobox({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
-          <Command className="bg-white rounded">
+          <Command className="bg-white rounded ">
             <CommandInput placeholder={placeholder} />
             <CommandList>
               <CommandEmpty>Nenhum item encontrado...</CommandEmpty>
@@ -108,15 +107,15 @@ export function Combobox({
                     value={framework.id}
                     onSelect={(currentValue) => {
                       const selectedFramework = data.find(
-                        (f) => f.id === currentValue
+                        (f) => f.descricao === currentValue
                       );
+                      console.log(selectedFramework)
                       if (selectedFramework) {
                         setValue(selectedFramework.descricao);
                         form.setFieldValue(id, selectedFramework.id);
                       }
                       setOpen(false);
                     }}
-                    defaultValue={item?.id}
                   >
                     <Check
                       className={cn(
@@ -135,6 +134,7 @@ export function Combobox({
         </PopoverContent>
       </Popover>
       <div className="h-4">
+        {/* Mostra mensagem de erro, se houver */}
         {messagesErros && (
           <span className="text-red-500 text-sm">{messagesErros}</span>
         )}
