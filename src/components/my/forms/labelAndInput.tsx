@@ -2,6 +2,8 @@ import { Label } from "@radix-ui/react-label";
 import { Eye, EyeOff } from "lucide-react";
 import { InputHTMLAttributes, useState } from "react";
 import { FieldProps } from "formik";
+import InputMask from "react-input-mask";
+
 import "./index.css";
 
 type LabelAndInputType = FieldProps & {
@@ -12,6 +14,7 @@ type LabelAndInputType = FieldProps & {
   autoFocus?: boolean;
   messagesErros?: string;
   width?: string;
+  mask?: string | undefined; // Caso seja necessário aplicar máscara de entrada
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export function LabelAndInput({
@@ -23,6 +26,7 @@ export function LabelAndInput({
   autoFocus = false,
   messagesErros,
   width = "w-full",
+  mask,
   ...rest
 }: LabelAndInputType) {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +44,8 @@ export function LabelAndInput({
       <div
         className={`relative rounded border border-zinc-500 flex items-center ${width} h-10 p-1`}
       >
-        <input
+        <InputMask
+          mask={mask || ""}
           {...field}
           id={id}
           className="control"

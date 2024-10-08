@@ -64,7 +64,7 @@ export default function Grid({
               <tr
                 key={idx}
                 className={`border-t ${
-                  idx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                  idx % 2 === 0 ? "bg-white" : "bg-gray-100"
                 }`}
               >
                 {fields.map((i) => (

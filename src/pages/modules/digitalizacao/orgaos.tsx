@@ -66,6 +66,7 @@ export function Orgaos() {
             name="cnpj"
             label="Cnpj"
             width="w-[200px]"
+            mask="99.999.999/9999-99"
             required="required"
             component={LabelAndInput}
             messagesErros={<ErrorMessage name="cnpj" />}

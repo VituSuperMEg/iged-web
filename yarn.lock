@@ -799,6 +799,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-input-mask@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.npmjs.org/@types/react-input-mask/-/react-input-mask-3.0.5.tgz"
+  integrity sha512-vQ1x6ykwjDrDrJZq1zw5/uQ+nqGHUV6bWscsVZJ/qsNwNXWxZm7KRBHLJ5k6TQt3MHjhpoYHzPH6FwjVSZODHA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0", "@types/react@^18.3.3", "@types/react@>=16.8", "@types/react@>=16.9.11":
   version "18.3.5"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.3.5.tgz"
@@ -2105,7 +2112,7 @@ react-bootstrap-typeahead@^6.3.2:
     scroll-into-view-if-needed "^3.1.0"
     warning "^4.0.1"
 
-"react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react-dom@^16.8.0 || ^17 || ^18", react-dom@^18.3.1, react-dom@>=16.3.0, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=18:
+"react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react-dom@^16.8.0 || ^17 || ^18", react-dom@^18.3.1, react-dom@>=0.14.0, react-dom@>=16.3.0, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=18:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
@@ -2122,6 +2129,14 @@ react-fast-compare@^3.0.1:
   version "3.2.2"
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.2.tgz"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
+
+react-input-mask@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/react-input-mask/-/react-input-mask-2.0.4.tgz"
+  integrity sha512-1hwzMr/aO9tXfiroiVCx5EtKohKwLk/NT8QlJXHQ4N+yJJFyUuMT+zfTpLBwX/lK3PkuMlievIffncpMZ3HGRQ==
+  dependencies:
+    invariant "^2.2.4"
+    warning "^4.0.2"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -2210,7 +2225,7 @@ react-toastify@^10.0.5:
   dependencies:
     clsx "^2.1.0"
 
-"react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.x || ^17.x || ^18.x", react@^18.3.1, react@>=15.0.0, react@>=16.3.0, react@>=16.8, react@>=16.8.0, react@>=18:
+"react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.x || ^17.x || ^18.x", react@^18.3.1, react@>=0.14.0, react@>=15.0.0, react@>=16.3.0, react@>=16.8, react@>=16.8.0, react@>=18:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
