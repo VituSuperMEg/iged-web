@@ -14,17 +14,15 @@ export interface IBreadcrumb {
 
 export function BreadCrumb({ displayName }: IBreadcrumb) {
   return (
-    <Breadcrumb
-      className="hidden md:flex"
-      style={{
-        marginTop: -40,
-      }}
-    >
+    <Breadcrumb className="hidden md:flex">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link to="/dashboard">
-              <Home size={20} />
+              <Home
+                size={20}
+                className="transition-transform duration-200 hover:scale-110"
+              />
             </Link>
           </BreadcrumbLink>
         </BreadcrumbItem>

@@ -44,9 +44,10 @@ export function LabelAndInput({
           {...field}
           id={id}
           className="control"
-          type={type === "password" && !showPassword ? "text" : type}
+          type={!showPassword ? type : "text"}
           autoFocus={autoFocus}
           disabled={rest.disabled}
+          style={{ textTransform: "uppercase" }}
           // {...rest}
         />
         {type === "password" && (
@@ -55,11 +56,7 @@ export function LabelAndInput({
             onClick={togglePasswordVisibility}
             className="absolute right-3 cursor-pointer"
           >
-            {showPassword ? (
-              <EyeOff className="" />
-            ) : (
-              <Eye className="" />
-            )}
+            {showPassword ? <EyeOff className="" /> : <Eye className="" />}
           </button>
         )}
       </div>

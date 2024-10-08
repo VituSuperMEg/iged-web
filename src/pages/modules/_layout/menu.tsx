@@ -31,7 +31,7 @@ export const Menu = () => {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
-        <AccordionTrigger>
+        <AccordionTrigger className="hover:bg-zinc-100">
           <div className="flex gap-2 items-end">
             <Plus /> <span>Cadastros</span>
           </div>
@@ -52,7 +52,7 @@ export const Menu = () => {
       </AccordionItem>
       <hr />
       <AccordionItem value="item-2">
-        <AccordionTrigger>
+        <AccordionTrigger className="hover:bg-zinc-100">
           <div className="flex gap-2 items-end">
             <Package /> <span>Documentos</span>
           </div>

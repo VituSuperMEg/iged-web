@@ -99,9 +99,9 @@ export function Crud({
 
   return (
     <div className="w-full h-[800px]" style={{ marginTop: -20 }}>
-      <BreadCrumb displayName={displayName} />
       <div className="mt-5 w-full flex-col">
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <BreadCrumb displayName={displayName} />
           {view === "list" ? (
             <Button
               className="bg-zinc-700 rounded flex gap-2 mt-2"
