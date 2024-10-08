@@ -11,8 +11,8 @@ const getToken = () => {
 export type ApiMethods = "get" | "post" | "put" | "delete" | "patch";
 
 export const api = axios.create({
-  baseURL: "https://api-digitalizacao-nest.vercel.app/",
-  // baseURL: "http://localhost:3333",
+  // baseURL: "https://api-digitalizacao-nest.vercel.app/",
+  baseURL: "http://localhost:3333",
   headers: {
     "x-cliente-id": "0",
   },
@@ -25,7 +25,6 @@ export const submit = async (
 ): Promise<void> => {
   try {
     if (action === "delete") {
-      console.log(params)
       await api[action](path + "/" + params);
     } else {
       await api[action](path, params);

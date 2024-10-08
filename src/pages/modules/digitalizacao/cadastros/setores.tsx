@@ -1,5 +1,5 @@
 import { Crud } from "@/components/my/Crud/crud";
-import { Filter } from "@/components/my/forms/filter";
+import { Combobox } from "@/components/my/forms/combox";
 import { LabelAndInput } from "@/components/my/forms/labelAndInput";
 import { ErrorMessage, Field } from "formik";
 
@@ -10,7 +10,7 @@ export function Setores() {
       emptyObject={{
         id: "",
         descricao: "",
-        unidade_orcamentaria_id: ""
+        unidade_orcamentaria_id: "",
       }}
       fields={[
         {
@@ -38,21 +38,23 @@ export function Setores() {
             width="w-[700px]"
             required
             component={LabelAndInput}
-            erros={<ErrorMessage name="descricao" />}
+            messagesErros={<ErrorMessage name="descricao" />}
           />
-          <Field 
+          <Field
             id="unidade_orcamentaria_id"
-            name="unidade_orcamentaria_id"
-            width="w-[300px]"
-            path="unidade-orcamentaria"
             label="Unidade Orcamentaria"
-            component={Filter}
+            path="unidade-orcamentaria"
+            width="w-1/4"
+            component={Combobox}
+            required
+            messagesErros={<ErrorMessage name="unidade_orcamentaria_id" />}
           />
         </div>
       )}
       validationSchema={(y: any) => {
         return {
           descricao: y.string().required("Campo Obrigatório"),
+          unidade_orcamentaria_id: y.string().required("Campo Obrigatório"),
         };
       }}
       endPoint="/api/v1/setores"
