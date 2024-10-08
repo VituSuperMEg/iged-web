@@ -25,6 +25,7 @@ type GridProps = {
   fields: Field[]; // Campos que descrevem as colunas
   enableBtnActions?: boolean; // Indica se os botões de ação estão habilitados
   loadShow: (item: ListItem) => void; // Função para carregar um item ao clicar no botão de edição
+  handleDelete: (item: ListItem) => void; // Função para
 };
 
 export default function Grid({
@@ -32,6 +33,7 @@ export default function Grid({
   fields,
   enableBtnActions = false,
   loadShow,
+  handleDelete,
 }: GridProps) {
   return (
     <div className="">
@@ -97,6 +99,7 @@ export default function Grid({
                           <Trash
                             className="cursor-pointer text-red-500"
                             size={20}
+                            onClick={() => handleDelete(item.id)}
                           />
                         </TooltipTrigger>
                         <TooltipContent className="bg-zinc-900 text-white rounded">

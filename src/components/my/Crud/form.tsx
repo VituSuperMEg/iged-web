@@ -2,7 +2,6 @@ import * as yup from "yup";
 import { Formik, Field, ErrorMessage } from "formik";
 import FormButtons from "./helpers/form-buttons";
 
-
 export function Form(props: any) {
   return (
     <>
@@ -26,7 +25,11 @@ export function Form(props: any) {
                 setVisibleBtns={props.setVisibleBtns}
               />
               {props.enableBtns && props.visibleBtns && (
-                <FormButtons {...props} handleSave={objects.submitForm} />
+                <FormButtons
+                  {...props}
+                  handleSave={objects.submitForm}
+                  handleReset={objects.handleReset}
+                />
               )}
             </form>
           )}
@@ -35,4 +38,3 @@ export function Form(props: any) {
     </>
   );
 }
-

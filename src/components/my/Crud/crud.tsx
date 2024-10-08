@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { BreadCrumb, IBreadcrumb } from "../breadcrumb";
 import { Button } from "../Button";
 import { Plus, Search } from "lucide-react";
-import { api } from "@/services/api";
+import { api, submit } from "@/services/api";
 import { Form } from "./form";
 import Grid from "./grid";
 import Pagination from "../pagination";
+import Message from "../core/messages";
 
 type Field = {
   name: string;
@@ -73,13 +74,23 @@ export function Crud({
 
   const handleSave = async (values: typeof emptyObject) => {
     if (values.id) {
-      await api.put(endPoint, values);
+      await submit(endPoint, "put", values);
     } else {
-      await api.post(endPoint, values);
+      await submit(endPoint, "post", values);
     }
-
     loadData();
     setView("list");
+  };
+
+  const handleDelete = async (item: typeof emptyObject) => {
+    const checked = await Message.confirmationReturn(
+      "Deseja realmente excluir este registro?"
+    );
+    if (checked) {
+      await submit(endPoint, "delete", item);
+      loadData();
+      setView("list");
+    }
   };
 
   useEffect(() => {
@@ -120,6 +131,7 @@ export function Crud({
               fields={fields}
               list={data}
               loadShow={loadShow}
+              handleDelete={handleDelete}
             />
             {pagination.totalPages > 0 && (
               <>
@@ -128,7 +140,7 @@ export function Crud({
                   onPageChange={(page) => setPage(page)}
                   totalPages={pagination.totalPages}
                 />
-                <span className="text-zinc-400">
+                <span className="text-zinc-600">
                   Mostrando {pagination.page} de {pagination.totalPages}
                 </span>
               </>
@@ -145,6 +157,7 @@ export function Crud({
             setDataObjecrt={setDataObjecrt}
             visibleBtns={visibleBtns}
             handleNew={handleNew}
+            handleDelete={handleDelete}
             enableBtns={true}
             handleSubmit={handleSave}
             view={view}
