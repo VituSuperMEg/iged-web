@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import useMenuStore from "@/store/usePanel";
 
 type MenuItemType = {
   Icon: any;
@@ -13,21 +14,29 @@ type MenuItemType = {
   href: string;
 };
 
+// Componente para o item de menu
 export const MenuItem = ({ label, href }: MenuItemType) => {
+  const setActiveMenu = useMenuStore((state) => state.setActiveMenu); 
+
+  const handleMenuClick = () => {
+    setActiveMenu(label); 
+  };
+
   return (
-    <>
-      <Link
-        to={href}
-        className="flex gap-2 border-b h-10 border-zinc-50 hover:bg-zinc-300 items-center pl-1 rounded"
-      >
-        {/* <Icon className="h-5 w-5" /> */}
-        <span className="text-zinc-500">{label}</span>
-      </Link>
-    </>
+    <Link
+      to={href}
+      className="flex gap-2 border-b h-10 border-zinc-50 hover:bg-zinc-300 items-center pl-1 rounded"
+      onClick={handleMenuClick} 
+    >
+      <span className="text-zinc-500">{label}</span>
+    </Link>
   );
 };
 
+// Componente de Menu
 export const Menu = () => {
+  const activeMenu = useMenuStore((state) => state.activeMenu); // Hook para obter o menu ativo
+
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
