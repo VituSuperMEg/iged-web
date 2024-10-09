@@ -5,6 +5,7 @@ import { Field } from "formik";
 export function TiposDocumentos() {
   return (
     <Crud
+      displayMenu="Cadastros"
       displayName="Tipo Documento"
       emptyObject={{
         id: "",
@@ -20,14 +21,13 @@ export function TiposDocumentos() {
           name: "descricao",
         },
       ]}
-      FormWrapper={(props : any) => (
+      FormWrapper={(props: any) => (
         <div className="flex gap-2 flex-wrap max-w-full">
           <Field
             id="id"
             name="id"
             label="Código"
             disabled
-       
             component={LabelAndInput}
           />
           <Field
@@ -44,7 +44,7 @@ export function TiposDocumentos() {
       )}
       validationSchema={(y: any) => {
         return {
-          descricao: y.string().required("Campo Obrigatório")
+          descricao: y.string().required("Campo Obrigatório"),
         };
       }}
       endPoint="/api/v1/tipos-documentos"

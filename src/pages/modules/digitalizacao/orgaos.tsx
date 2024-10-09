@@ -15,9 +15,11 @@ const emptyObejct = {
   id: "",
   responsavel: "",
 };
+
 export function Orgaos() {
   return (
     <Crud
+      displayMenu="Cadastros"
       displayName="Unidade Orcamentárias"
       emptyObject={emptyObejct}
       fields={[

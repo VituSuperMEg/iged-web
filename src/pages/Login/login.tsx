@@ -55,6 +55,7 @@ export function Login() {
                   name="login"
                   required
                   autoFocus
+                  isUpperCase="none"
                   component={LabelAndInput}
                   onChange={handleChange}
                   messagesErros={errors.login}

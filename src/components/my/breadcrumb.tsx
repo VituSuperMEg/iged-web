@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 
 export interface IBreadcrumb {
   displayName: string;
+  displayMenu: string;
 }
 
-export function BreadCrumb({ displayName }: IBreadcrumb) {
+export function BreadCrumb({ displayName, displayMenu }: IBreadcrumb) {
   return (
     <Breadcrumb className="hidden md:flex">
       <BreadcrumbList>
@@ -26,6 +27,8 @@ export function BreadCrumb({ displayName }: IBreadcrumb) {
             </Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbLink>{displayMenu}</BreadcrumbLink>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>

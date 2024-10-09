@@ -17,11 +17,12 @@ type Field = {
 
 type CrudType = {
   endPoint: string;
-  emptyObject: Record<string, any>; // Objeto dinâmico para os dados
-  fields: Field[]; // Array de campos para a grid
-  FormWrapper: React.FC<any>; // Wrapper do formulário, tipado como componente React
-  validationSchema: any; // Pode ser uma schema Yup ou outra
-} & IBreadcrumb; // Herda IBreadcrumb para breadcrumbs
+  emptyObject: Record<string, any>; 
+  fields: Field[]; 
+  FormWrapper: React.FC<any>; 
+  validationSchema: any; 
+  displayMenu: string;
+} & IBreadcrumb; 
 
 type PaginationType = {
   limit: number;
@@ -37,6 +38,7 @@ export function Crud({
   fields,
   FormWrapper,
   validationSchema,
+  displayMenu
 }: CrudType) {
   const [view, setView] = useState<"list" | "new" | "edit">("list");
   const [data, setData] = useState<(typeof emptyObject)[]>([]);
@@ -101,7 +103,7 @@ export function Crud({
     <div className="w-full h-[800px]" style={{ marginTop: -20 }}>
       <div className="mt-5 w-full flex-col">
         <div className="flex justify-between">
-          <BreadCrumb displayName={displayName} />
+          <BreadCrumb displayMenu={displayMenu} displayName={displayName} />
           {view === "list" ? (
             <Button
               className="bg-zinc-700 rounded flex gap-2 mt-2"

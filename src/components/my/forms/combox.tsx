@@ -45,12 +45,11 @@ export function Combobox({
   width,
   form,
   id,
-  messagesErros
+  messagesErros,
 }: ComboBoxType) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(""); 
-  const [data, setData] = React.useState<DataType[]>([]); 
-  const [item, setItem] = React.useState<DataType | null>(null);
+  const [value, setValue] = React.useState("");
+  const [data, setData] = React.useState<DataType[]>([]);
 
   const loadData = async () => {
     const res = await api.get(`/api/v1/${path}/options`);
@@ -61,8 +60,7 @@ export function Combobox({
     if (form.values[id]) {
       const res = await api.get(`/api/v1/${path}/find?id=${form.values[id]}`);
       if (res.data) {
-        setValue(res.data.descricao); 
-        setItem(res.data);
+        setValue(res.data.descricao);
       }
     }
   };
@@ -109,7 +107,7 @@ export function Combobox({
                       const selectedFramework = data.find(
                         (f) => f.descricao === currentValue
                       );
-                      console.log(selectedFramework)
+                      console.log(selectedFramework);
                       if (selectedFramework) {
                         setValue(selectedFramework.descricao);
                         form.setFieldValue(id, selectedFramework.id);

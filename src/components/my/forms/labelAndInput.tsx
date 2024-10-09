@@ -14,7 +14,8 @@ type LabelAndInputType = FieldProps & {
   autoFocus?: boolean;
   messagesErros?: string;
   width?: string;
-  mask?: string | undefined; // Caso seja necessário aplicar máscara de entrada
+  mask?: string | undefined;
+  isUpperCase: "uppercase" | "none";
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export function LabelAndInput({
@@ -27,6 +28,7 @@ export function LabelAndInput({
   messagesErros,
   width = "w-full",
   mask,
+  isUpperCase = "uppercase",
   ...rest
 }: LabelAndInputType) {
   const [showPassword, setShowPassword] = useState(false);
@@ -52,7 +54,7 @@ export function LabelAndInput({
           type={!showPassword ? type : "text"}
           autoFocus={autoFocus}
           disabled={rest.disabled}
-          style={{ textTransform: "uppercase" }}
+          style={{ textTransform: isUpperCase }}
           // {...rest}
         />
         {type === "password" && (

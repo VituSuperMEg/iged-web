@@ -6,6 +6,8 @@ import { ErrorMessage, Field } from "formik";
 export function Setores() {
   return (
     <Crud
+      endPoint="/api/v1/setores"
+      displayMenu="Cadastros"
       displayName="Setores"
       emptyObject={{
         id: "",
@@ -57,7 +59,6 @@ export function Setores() {
           unidade_orcamentaria_id: y.string().required("Campo Obrigatório"),
         };
       }}
-      endPoint="/api/v1/setores"
     />
   );
 }
