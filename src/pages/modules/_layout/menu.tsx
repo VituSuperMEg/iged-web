@@ -16,17 +16,20 @@ type MenuItemType = {
 
 // Componente para o item de menu
 export const MenuItem = ({ label, href }: MenuItemType) => {
-  const setActiveMenu = useMenuStore((state) => state.setActiveMenu); 
+  const setActiveMenu = useMenuStore((state) => state.setActiveMenu);
 
   const handleMenuClick = () => {
-    setActiveMenu(label); 
+    setActiveMenu({
+      href: href,
+      label: label,
+    });
   };
 
   return (
     <Link
       to={href}
       className="flex gap-2 border-b h-10 border-zinc-50 hover:bg-zinc-300 items-center pl-1 rounded"
-      onClick={handleMenuClick} 
+      onClick={handleMenuClick}
     >
       <span className="text-zinc-500">{label}</span>
     </Link>

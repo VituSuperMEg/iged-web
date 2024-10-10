@@ -1,32 +1,27 @@
 import create from "zustand";
 
-// Define the type for the store
 interface MenuState {
-  activeMenu: string[]; // Array of active menu items
-  setActiveMenu: (menu: string) => void; // Add a menu item
-  removeActiveMenu: (menu: string) => void; // Remove a menu item
-  resetMenu: () => void; // Reset the menu state
+  activeMenu: { label: string; href: string }[];
+  setActiveMenu: (menu: { label: string; href: string }) => void;
+  removeActiveMenu: (menu: { label: string; href: string }) => void;
+  resetMenu: () => void;
 }
 
-// Create the Zustand store with types
 const useMenuStore = create<MenuState>((set) => ({
-  activeMenu: [], // Start with an empty array
+  activeMenu: [],
 
-  // Function to add a menu item to the array, only if it's not already present
-  setActiveMenu: (menu: string) =>
+  setActiveMenu: (menu) =>
     set((state) => ({
-      activeMenu: state.activeMenu.includes(menu)
+      activeMenu: state.activeMenu.find((item) => item.href === menu.href)
         ? state.activeMenu
         : [...state.activeMenu, menu],
     })),
 
-  // Function to remove a menu item from the array
-  removeActiveMenu: (menu: string) =>
+  removeActiveMenu: (menu) =>
     set((state) => ({
-      activeMenu: state.activeMenu.filter((item) => item !== menu),
+      activeMenu: state.activeMenu.filter((item) => item.href !== menu.href),
     })),
 
-  // Function to reset the menu state
   resetMenu: () => set({ activeMenu: [] }),
 }));
 
