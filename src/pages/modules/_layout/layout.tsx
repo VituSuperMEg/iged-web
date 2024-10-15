@@ -14,7 +14,7 @@ export function Dashboard() {
         <div className="flex h-full max-h-screen flex-col gap-2 bg-white">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 justify-between">
             <Link to="/" className="flex items-center gap-2 font-semibold">
-              <span className="">IDEG</span>
+              <span className="">IGED</span>
             </Link>
             <Perfil />
           </div>
