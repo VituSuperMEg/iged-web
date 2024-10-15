@@ -1,10 +1,13 @@
 import { Home } from "lucide-react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { Menu } from "./menu";
 import { Perfil } from "@/components/my/perfil";
 import { Panel } from "@/components/my/panel";
 
 export function Dashboard() {
+  const location = useLocation();
+
+  const shouldHideContent = location.pathname === "/dashboard";
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] bg-zinc-100">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -33,7 +36,7 @@ export function Dashboard() {
       <div className="flex flex-col">
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 m-5 bg-white rounded shadow">
           <Panel />
-          <Outlet />
+          {!shouldHideContent && <Outlet />}
         </main>
       </div>
     </div>
