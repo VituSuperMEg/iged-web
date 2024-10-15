@@ -14,7 +14,6 @@ type MenuItemType = {
   href: string;
 };
 
-// Componente para o item de menu
 export const MenuItem = ({ label, href }: MenuItemType) => {
   const setActiveMenu = useMenuStore((state) => state.setActiveMenu);
 
@@ -36,10 +35,7 @@ export const MenuItem = ({ label, href }: MenuItemType) => {
   );
 };
 
-// Componente de Menu
 export const Menu = () => {
-  const activeMenu = useMenuStore((state) => state.activeMenu); // Hook para obter o menu ativo
-
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">

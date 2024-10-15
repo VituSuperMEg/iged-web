@@ -1,6 +1,6 @@
 import useMenuStore from "@/store/usePanel";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Panel() {
   const activeMenu = useMenuStore((state) => state.activeMenu);
@@ -8,6 +8,8 @@ export function Panel() {
   const location = useLocation();
   const lastMenuRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const [indexRoute, setIndexRoute] = useState(0);
+  const [isDelete, setIsDelete] = useState(false);
 
   useEffect(() => {
     if (lastMenuRef.current) {
@@ -15,14 +17,25 @@ export function Panel() {
     }
   }, [activeMenu]);
 
-  const handleRemoveMenu = (menu: any, index: any) => {
-    removeActiveMenu(menu);
-    if (index > 0) {
-      const previousMenu = activeMenu[index - 1];
-      navigate("/dashboard/" + previousMenu.href);
-    } else {
-      navigate("/dashboard");
+  useEffect(() => {
+    if (isDelete) {
+      if (indexRoute > 0) {
+        const previousMenu = activeMenu[indexRoute - 1];
+        navigate("/dashboard/" + previousMenu.href);
+      }
+      if (activeMenu.length === 0) {
+        navigate("/dashboard");
+      }
     }
+  }, [activeMenu, navigate, indexRoute, isDelete]);
+
+  const handleRemoveMenu = (menu: any, index: number) => {
+    setIsDelete(true);
+    removeActiveMenu(menu);
+    setIndexRoute(index);
+    setInterval(() => {
+      setIsDelete(false);
+    }, 100);
   };
 
   return (
@@ -52,8 +65,8 @@ export function Panel() {
         activeMenu.map((menu, index) => (
           <Link to={menu.href} key={index}>
             <div
-              className={`h-[30px] w-[200px] text-center flex items-center justify-between rounded shadow mb-2 px-2 ${
-                location.pathname === "/dashboard/" + menu.href
+              className={`h-[30px] w-auto text-center pr-8 flex items-center justify-between rounded shadow mb-2 px-2 ${
+                location.pathname === `/dashboard/${menu.href}`
                   ? "bg-emerald-500 text-white"
                   : "bg-zinc-100"
               }`}
@@ -62,7 +75,7 @@ export function Panel() {
             >
               <span
                 className={
-                  location.pathname === "/dashboard/" + menu.href
+                  location.pathname === `/dashboard/${menu.href}`
                     ? "text-white"
                     : "text-gray-800"
                 }
