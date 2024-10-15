@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  MemoryRouter as Router,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
 import { Login } from "../Login/login";
 import { AuthProvider } from "@/context/AuthProvider";
 import { Documentos } from "../modules/digitalizacao/documentos";
@@ -14,15 +19,24 @@ export function MainRouter() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="orders" element={<Documentos />} />
-            <Route path="orgaos" element={<Orgaos />} />
-            <Route path="configuracao" element={<Configuracao />} />
-            <Route path="tipos-documentos" element={<TiposDocumentos />} />
-            <Route path="setores" element={<Setores />} />
-          </Route>
+          <Route path="/dashboard/*" element={<DashboardWithParams />} />
         </Routes>
       </AuthProvider>
     </Router>
+  );
+}
+
+function DashboardWithParams() {
+  const { "*": dashboardParam } = useParams(); 
+
+  return (
+    <>
+      <Dashboard />
+      {dashboardParam === "orders" && <Documentos />}
+      {dashboardParam === "orgaos" && <Orgaos />}
+      {dashboardParam === "configuracao" && <Configuracao />}
+      {dashboardParam === "tipos-documentos" && <TiposDocumentos />}
+      {dashboardParam === "setores" && <Setores />}
+    </>
   );
 }
