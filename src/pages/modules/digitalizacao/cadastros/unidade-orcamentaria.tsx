@@ -16,7 +16,7 @@ const emptyObejct = {
   responsavel: "",
 };
 
-export function Orgaos() {
+export function UnidadeOrcamentaria() {
   return (
     <Crud
       displayMenu="Cadastros"

@@ -5,8 +5,8 @@ import { HTTPCODEERROR } from "./httpCodeError";
 import { MESSAGESSTATUSCODE } from "./messages-status-code";
 
 const getToken = () => {
-  const state = JSON.parse(localStorage.getItem("state") || "{}");
-  return state.token || null;
+  const state = JSON.parse(localStorage.getItem("auth-storage") || "{}");
+  return state.state.token || null;
 };
 export type ApiMethods = "get" | "post" | "put" | "delete" | "patch";
 
@@ -39,7 +39,7 @@ export const submit = async (
 api.interceptors.request.use(
   (config) => {
     const token = getToken();
-
+    console.log(token);
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }

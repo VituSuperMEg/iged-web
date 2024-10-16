@@ -46,6 +46,7 @@ export function Combobox({
   form,
   id,
   messagesErros,
+  disabled
 }: ComboBoxType) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
@@ -94,7 +95,7 @@ export function Combobox({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
-          <Command className="bg-white rounded ">
+          <Command className="bg-white rounded">
             <CommandInput placeholder={placeholder} />
             <CommandList>
               <CommandEmpty>Nenhum item encontrado...</CommandEmpty>
@@ -107,13 +108,13 @@ export function Combobox({
                       const selectedFramework = data.find(
                         (f) => f.descricao === currentValue
                       );
-                      console.log(selectedFramework);
                       if (selectedFramework) {
                         setValue(selectedFramework.descricao);
                         form.setFieldValue(id, selectedFramework.id);
                       }
                       setOpen(false);
                     }}
+                    disabled={disabled}
                   >
                     <Check
                       className={cn(
