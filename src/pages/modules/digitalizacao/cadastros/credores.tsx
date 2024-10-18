@@ -24,7 +24,7 @@ export function Credores() {
         cidade: "",
         telefone: "",
         telefone_complementar: "",
-        banco: "",
+        banco_id: "",
         agencia: "",
         conta: "",
         observacoes: "",
@@ -42,9 +42,10 @@ export function Credores() {
         {
           label: "CPF",
           name: "cpf",
+          format: "cpf",
         },
       ]}
-      FormWrapper={() => (
+      FormWrapper={(props) => (
         <div className="flex gap-2 flex-wrap" style={{ marginTop: -40 }}>
           <h6>Dados Funcionais</h6>
           <Separator className="bg-zinc-100" />
@@ -164,12 +165,13 @@ export function Credores() {
             <h6>Conta Bancária</h6>
             <Separator className="bg-zinc-100" />
             <Field
-              id="banco"
+              id="banco_id"
+              name="banco_id"
               label="Bancos"
               path="bancos"
               width="w-[250px]"
               component={Combobox}
-              messagesErros={<ErrorMessage name="banco" />}
+              messagesErros={<ErrorMessage name="banco_id" />}
             />
             <Field
               id="agencia"
@@ -210,7 +212,7 @@ export function Credores() {
           numero: y.string().required("Campo Obrigatório"),
           bairro: y.string().required("Campo Obrigatório"),
           cep: y.string().required("Campo Obrigatório"),
-          banco: y.string().required("Campo Obrigatório"),
+          banco_id: y.string().required("Campo Obrigatório"),
           agencia: y.string().required("Campo Obrigatório"),
           conta: y.string().required("Campo Obrigatório"),
         };

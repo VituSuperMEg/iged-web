@@ -13,16 +13,17 @@ type Field = {
   label: string;
   classHead?: string;
   classBody?: string;
+  format?: string;
 };
 
 type CrudType = {
   endPoint: string;
-  emptyObject: Record<string, any>; 
-  fields: Field[]; 
-  FormWrapper: React.FC<any>; 
-  validationSchema: any; 
+  emptyObject: Record<string, any>;
+  fields: Field[];
+  FormWrapper: React.FC<any>;
+  validationSchema: any;
   displayMenu: string;
-} & IBreadcrumb; 
+} & IBreadcrumb;
 
 type PaginationType = {
   limit: number;
@@ -38,7 +39,7 @@ export function Crud({
   fields,
   FormWrapper,
   validationSchema,
-  displayMenu
+  displayMenu,
 }: CrudType) {
   const [view, setView] = useState<"list" | "new" | "edit">("list");
   const [data, setData] = useState<(typeof emptyObject)[]>([]);
@@ -81,7 +82,7 @@ export function Crud({
       await submit(endPoint, "post", values);
     }
     loadData();
-    setView("list");
+    // setView("list");
   };
 
   const handleDelete = async (item: typeof emptyObject) => {

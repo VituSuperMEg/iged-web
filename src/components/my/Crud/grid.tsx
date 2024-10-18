@@ -5,11 +5,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Edit, Trash } from "lucide-react";
+import { formatTable } from "./grid-util";
 
 // Tipagem para cada campo
 type Field = {
   name: string;
   label: string;
+  format?: string;
   classHead?: string;
   classBody?: string;
 };
@@ -74,7 +76,7 @@ export default function Grid({
                   >
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: item[i.name] ? item[i.name] : "-",
+                        __html: item[i.name] ? formatTable(i.format, item[i.name]) : "-",
                       }}
                     />
                   </td>
