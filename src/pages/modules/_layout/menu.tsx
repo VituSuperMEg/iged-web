@@ -57,6 +57,7 @@ export const Menu = () => {
           />
           <MenuItem Icon={Package} label="Setores" href="setores" />
           <MenuItem Icon={Package} label="Credores" href="credores" />
+          <MenuItem Icon={Package} label="Salas" href="salas" />
         </AccordionContent>
       </AccordionItem>
       <hr />

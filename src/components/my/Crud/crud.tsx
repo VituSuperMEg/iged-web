@@ -7,6 +7,7 @@ import { Form } from "./form";
 import Grid from "./grid";
 import Pagination from "../pagination";
 import Message from "../core/messages";
+import { Loading } from "./loading";
 
 type Field = {
   name: string;
@@ -53,8 +54,10 @@ export function Crud({
     total: 0,
     totalPages: 0,
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
   const loadData = async () => {
+    setLoading(true);
     const res = await api.get(`${endPoint}/page?page=${page}`);
     setData(res.data.data);
     setPagination({
@@ -63,6 +66,7 @@ export function Crud({
       totalPages: res.data.totalPages,
       limit: res.data.limit,
     });
+    setLoading(false);
   };
 
   const loadShow = async (item: typeof emptyObject) => {
@@ -76,13 +80,15 @@ export function Crud({
   };
 
   const handleSave = async (values: typeof emptyObject) => {
+    setLoading(true);
     if (values.id) {
       await submit(endPoint, "put", values);
     } else {
       await submit(endPoint, "post", values);
     }
     loadData();
-    // setView("list");
+    setView("list");
+    setLoading(false);
   };
 
   const handleDelete = async (item: typeof emptyObject) => {
@@ -90,9 +96,11 @@ export function Crud({
       "Deseja realmente excluir este registro?"
     );
     if (checked) {
+      setLoading(true);
       await submit(endPoint, "delete", item);
       loadData();
       setView("list");
+      setLoading(false);
     }
   };
 
@@ -102,6 +110,11 @@ export function Crud({
 
   return (
     <div className="w-full h-[800px]" style={{ marginTop: -20 }}>
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 z-50">
+          <Loading />
+        </div>
+      )}
       <div className="mt-5 w-full flex-col">
         <div className="flex justify-between">
           <BreadCrumb displayMenu={displayMenu} displayName={displayName} />

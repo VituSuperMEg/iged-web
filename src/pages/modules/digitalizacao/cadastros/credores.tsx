@@ -45,7 +45,7 @@ export function Credores() {
           format: "cpf",
         },
       ]}
-      FormWrapper={(props) => (
+      FormWrapper={() => (
         <div className="flex gap-2 flex-wrap" style={{ marginTop: -40 }}>
           <h6>Dados Funcionais</h6>
           <Separator className="bg-zinc-100" />

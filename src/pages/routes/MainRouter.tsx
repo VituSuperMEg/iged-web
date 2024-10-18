@@ -8,6 +8,7 @@ import { TiposDocumentos } from "../modules/digitalizacao/cadastros/tipo-documen
 import { Setores } from "../modules/digitalizacao/cadastros/setores";
 import { Dashboard } from "../modules/_layout/layout";
 import { Credores } from "../modules/digitalizacao/cadastros/credores";
+import { Salas } from "../modules/digitalizacao/cadastros/salas";
 
 export function MainRouter() {
   return (
@@ -22,6 +23,7 @@ export function MainRouter() {
             <Route path="tipos-documentos" element={<TiposDocumentos />} />
             <Route path="setores" element={<Setores />} />
             <Route path="credores" element={<Credores />} />
+            <Route path="salas" element={<Salas />} />
           </Route>
         </Routes>
       </AuthProvider>
