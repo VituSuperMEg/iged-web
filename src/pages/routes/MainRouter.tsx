@@ -9,6 +9,7 @@ import { Setores } from "../modules/digitalizacao/cadastros/setores";
 import { Dashboard } from "../modules/_layout/layout";
 import { Credores } from "../modules/digitalizacao/cadastros/credores";
 import { Salas } from "../modules/digitalizacao/cadastros/salas";
+import { Caixas } from "../modules/digitalizacao/cadastros/caixas";
 
 export function MainRouter() {
   return (
@@ -24,6 +25,7 @@ export function MainRouter() {
             <Route path="setores" element={<Setores />} />
             <Route path="credores" element={<Credores />} />
             <Route path="salas" element={<Salas />} />
+            <Route path="caixas" element={<Caixas />} />
           </Route>
         </Routes>
       </AuthProvider>
