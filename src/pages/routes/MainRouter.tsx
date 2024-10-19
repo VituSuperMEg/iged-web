@@ -10,6 +10,7 @@ import { Dashboard } from "../modules/_layout/layout";
 import { Credores } from "../modules/digitalizacao/cadastros/credores";
 import { Salas } from "../modules/digitalizacao/cadastros/salas";
 import { Caixas } from "../modules/digitalizacao/cadastros/caixas";
+import { Estantes } from "../modules/digitalizacao/cadastros/estantes";
 
 export function MainRouter() {
   return (
@@ -26,6 +27,7 @@ export function MainRouter() {
             <Route path="credores" element={<Credores />} />
             <Route path="salas" element={<Salas />} />
             <Route path="caixas" element={<Caixas />} />
+            <Route path="estantes" element={<Estantes />} />
           </Route>
         </Routes>
       </AuthProvider>
