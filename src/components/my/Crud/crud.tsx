@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BreadCrumb, IBreadcrumb } from "../breadcrumb";
 import { Button } from "../Button";
 import { Plus, Search } from "lucide-react";
@@ -10,6 +10,7 @@ import { Loading } from "./loading";
 import Grid from "./grid";
 import Pagination from "../pagination";
 import Message from "../core/messages";
+import { getViewKey } from "@/services/session";
 
 type Field = {
   name: string;
@@ -37,7 +38,10 @@ export function Crud({
   validationSchema,
   displayMenu,
 }: CrudType) {
-  const [view, setView] = useState<"list" | "new" | "edit">("list");
+  const [view, setView] = useState<"list" | "new" | "edit">(() => {
+    const savedView = localStorage.getItem(getViewKey(endPoint));
+    return savedView ? (savedView as "list" | "new" | "edit") : "list";
+  });
   const [dataObject, setDataObject] = useState<typeof emptyObject>(emptyObject);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
@@ -53,8 +57,12 @@ export function Crud({
   const { data, isLoading, refetch } = useQuery({
     queryKey: [endPoint, page],
     queryFn: () => fetchData(page),
-    staleTime: 1000 * 60 * 5,
+    // staleTime: 1000 * 60 * 5,
   });
+
+  useEffect(() => {
+    localStorage.setItem(getViewKey(endPoint), view);
+  }, [view, endPoint]); 
 
   const handleNew = () => {
     setDataObject(emptyObject);

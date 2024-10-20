@@ -2,8 +2,6 @@ import { Plus, RotateCcw, Save, Trash } from "lucide-react";
 
 export default function FormButtons(props: any) {
   const { emptyObject } = props;
-
-  console.log(props);
   return (
     <div className="flex justify-end mt-5 gap-2">
       {props.view === "edit" && (
