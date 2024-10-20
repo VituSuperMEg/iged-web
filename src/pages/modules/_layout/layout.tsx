@@ -21,7 +21,7 @@ export function Dashboard() {
           <div className="flex-1 ">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <Link
-                to="#"
+                to="/dashboard"
                 className="flex items-center gap-3 rounded-lg px-1 py-2 text-muted-foreground transition-all hover:text-primary h-10"
               >
                 <Home className="h-4 w-4" />

@@ -1,33 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { BreadCrumb, IBreadcrumb } from "../breadcrumb";
+import { BreadCrumb } from "../breadcrumb";
 import { Button } from "../Button";
 import { Plus, Search } from "lucide-react";
 import { api, submit } from "@/services/api";
 import { Form } from "./form";
 import { Loading } from "./loading";
+import { getViewKey } from "@/services/session";
+import { CrudType } from "./types/types";
 
 import Grid from "./grid";
 import Pagination from "../pagination";
 import Message from "../core/messages";
-import { getViewKey } from "@/services/session";
-
-type Field = {
-  name: string;
-  label: string;
-  classHead?: string;
-  classBody?: string;
-  format?: string;
-};
-
-type CrudType = {
-  endPoint: string;
-  emptyObject: Record<string, any>;
-  fields: Field[];
-  FormWrapper: React.FC<any>;
-  validationSchema: any;
-  displayMenu: string;
-} & IBreadcrumb;
 
 export function Crud({
   displayName,
@@ -62,7 +46,7 @@ export function Crud({
 
   useEffect(() => {
     localStorage.setItem(getViewKey(endPoint), view);
-  }, [view, endPoint]); 
+  }, [view, endPoint]);
 
   const handleNew = () => {
     setDataObject(emptyObject);
