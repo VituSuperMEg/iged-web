@@ -39,10 +39,10 @@ export function Panel() {
   };
 
   return (
-    <div className="mt-[-30px] ml-[-25px] flex gap-1">
+    <div className="mt-[-40px] ml-[-25px] flex gap-1">
       <Link to="/dashboard">
         <div
-          className={`h-[30px] w-[150px] text-center flex items-center justify-center rounded shadow mb-2 ${
+          className={`h-[30px] w-[150px] text-center flex items-center justify-center rounded shadow border border-white mb-2 ${
             location.pathname === "/dashboard"
               ? "bg-emerald-500 text-white"
               : "bg-zinc-100"
@@ -65,7 +65,7 @@ export function Panel() {
         activeMenu.map((menu, index) => (
           <Link to={menu.href} key={index}>
             <div
-              className={`h-[30px] w-auto text-center pr-8 flex items-center justify-between rounded shadow mb-2 px-2 ${
+              className={`h-[30px] w-auto text-center pr-8 flex items-center justify-between rounded shadow mb-2 px-2  border border-white ${
                 location.pathname === `/dashboard/${menu.href}`
                   ? "bg-emerald-500 text-white"
                   : "bg-zinc-100"

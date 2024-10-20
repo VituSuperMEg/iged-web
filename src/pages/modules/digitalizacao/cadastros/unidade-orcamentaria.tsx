@@ -42,6 +42,7 @@ export function UnidadeOrcamentaria() {
         {
           label: "Ativo",
           name: "ativo",
+          format: 'ativo'
         },
       ]}
       FormWrapper={() => (

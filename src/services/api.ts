@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { HTTPCODEERROR } from "./httpCodeError";
 import { MESSAGESSTATUSCODE } from "./messages-status-code";
+import useAuthStore from "@/store/useAuth";
 
 const getToken = () => {
   const state = JSON.parse(localStorage.getItem("auth-storage") || "{}");
@@ -56,7 +57,17 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    Message.error({ e: error.response.data.error });
+    const clearAuth = useAuthStore((state) => state.clearAuth);
+    if (error.response && error.response.status === 401) {
+      Message.error({
+        e: "Sua sessão expirou. Por favor, faça login novamente.",
+      });
+
+      clearAuth();
+    } else {
+      Message.error({ e: error.response.data.error });
+    }
+
     return Promise.reject(error);
   }
 );

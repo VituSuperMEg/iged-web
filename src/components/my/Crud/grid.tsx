@@ -6,29 +6,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Edit, Trash } from "lucide-react";
 import { formatTable } from "./grid-util";
-
-// Tipagem para cada campo
-type Field = {
-  name: string;
-  label: string;
-  format?: string;
-  classHead?: string;
-  classBody?: string;
-};
-
-// Tipagem para o item da lista
-type ListItem = {
-  [key: string]: any;
-};
-
-// Tipagem para as propriedades do componente
-type GridProps = {
-  list: ListItem[]; // Lista de itens, que é um array de objetos
-  fields: Field[]; // Campos que descrevem as colunas
-  enableBtnActions?: boolean; // Indica se os botões de ação estão habilitados
-  loadShow: (item: ListItem) => void; // Função para carregar um item ao clicar no botão de edição
-  handleDelete: (item: ListItem) => void; // Função para
-};
+import { GridProps } from "./types/types";
 
 export default function Grid({
   list,
@@ -76,7 +54,9 @@ export default function Grid({
                   >
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: item[i.name] ? formatTable(i.format, item[i.name]) : "-",
+                        __html: item[i.name]
+                          ? formatTable(i.format, item[i.name])
+                          : "-",
                       }}
                     />
                   </td>
