@@ -29,7 +29,6 @@ export const submit = async (
     } else {
       await api[action](path, params);
     }
-
     toast.success(MESSAGESSTATUSCODE(action));
   } catch (error: any) {
     Message.error({ e: HTTPCODEERROR(error.status) });
@@ -39,7 +38,6 @@ export const submit = async (
 api.interceptors.request.use(
   (config) => {
     const token = getToken();
-    console.log(token);
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }

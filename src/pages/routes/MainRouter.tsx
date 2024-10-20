@@ -11,26 +11,31 @@ import { Credores } from "../modules/digitalizacao/cadastros/credores";
 import { Salas } from "../modules/digitalizacao/cadastros/salas";
 import { Caixas } from "../modules/digitalizacao/cadastros/caixas";
 import { Estantes } from "../modules/digitalizacao/cadastros/estantes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient(); 
 
 export function MainRouter() {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="orders" element={<Documentos />} />
-            <Route path="orgaos" element={<UnidadeOrcamentaria />} />
-            <Route path="configuracao" element={<Configuracao />} />
-            <Route path="tipos-documentos" element={<TiposDocumentos />} />
-            <Route path="setores" element={<Setores />} />
-            <Route path="credores" element={<Credores />} />
-            <Route path="salas" element={<Salas />} />
-            <Route path="caixas" element={<Caixas />} />
-            <Route path="estantes" element={<Estantes />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route path="orders" element={<Documentos />} />
+              <Route path="orgaos" element={<UnidadeOrcamentaria />} />
+              <Route path="configuracao" element={<Configuracao />} />
+              <Route path="tipos-documentos" element={<TiposDocumentos />} />
+              <Route path="setores" element={<Setores />} />
+              <Route path="credores" element={<Credores />} />
+              <Route path="salas" element={<Salas />} />
+              <Route path="caixas" element={<Caixas />} />
+              <Route path="estantes" element={<Estantes />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </QueryClientProvider>
   );
 }
