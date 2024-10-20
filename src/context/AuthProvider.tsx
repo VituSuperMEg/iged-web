@@ -13,12 +13,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
+    }else{
+      navigate("/dashboard");
     }
-  }, [isAuthenticated, navigate]);
-
-  if (!isAuthenticated) {
-    navigate("/");
-  }
+  }, [isAuthenticated]);
 
   return <>{children}</>;
 }
