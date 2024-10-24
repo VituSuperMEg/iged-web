@@ -1,4 +1,4 @@
-import { File, Package, Plus } from "lucide-react";
+import { Package, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Accordion,
@@ -9,12 +9,12 @@ import {
 import useMenuStore from "@/store/usePanel";
 
 type MenuItemType = {
-  Icon: any;
+  Icon?: any;
   label: string;
   href: string;
 };
 
-export const MenuItem = ({ label, href }: MenuItemType) => {
+export const MenuItem = ({ label, href, Icon }: MenuItemType) => {
   const setActiveMenu = useMenuStore((state) => state.setActiveMenu);
 
   const handleMenuClick = () => {
@@ -30,7 +30,7 @@ export const MenuItem = ({ label, href }: MenuItemType) => {
       className="flex gap-2 border-b h-10 border-zinc-50 hover:bg-zinc-300 items-center pl-1 rounded"
       onClick={handleMenuClick}
     >
-      <span className="text-zinc-500">{label}</span>
+      {<Icon />} <span className="text-zinc-500">{label}</span>
     </Link>
   );
 };
@@ -45,32 +45,19 @@ export const Menu = () => {
           </div>
         </AccordionTrigger>
         <AccordionContent>
-          <MenuItem
-            Icon={Package}
-            label="Unidade Orcamentárias"
-            href="orgaos"
-          />
-          <MenuItem
-            Icon={File}
-            label="Tipos Documentos"
-            href="tipos-documentos"
-          />
-          <MenuItem Icon={Package} label="Setores" href="setores" />
-          <MenuItem Icon={Package} label="Credores" href="credores" />
-          <MenuItem Icon={Package} label="Salas" href="salas" />
-          <MenuItem Icon={Package} label="Caixas" href="caixas" />
-          <MenuItem Icon={Package} label="Estantes" href="estantes" />
+          <MenuItem label="Unidade Orcamentárias" href="orgaos" />
+          <MenuItem label="Tipos Documentos" href="tipos-documentos" />
+          <MenuItem label="Setores" href="setores" />
+          <MenuItem label="Credores" href="credores" />
+          <MenuItem label="Salas" href="salas" />
+          <MenuItem label="Caixas" href="caixas" />
+          <MenuItem label="Estantes" href="estantes" />
         </AccordionContent>
       </AccordionItem>
       <hr />
-      <AccordionItem value="item-2">
-        <AccordionTrigger className="hover:bg-zinc-100">
-          <div className="flex gap-2 items-end">
-            <Package /> <span>Documentos</span>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent></AccordionContent>
-      </AccordionItem>
+      <div className="hover:bg-zinc-100">
+        <MenuItem Icon={Package} label="Documetnos" href="documentos" />
+      </div>
     </Accordion>
   );
 };

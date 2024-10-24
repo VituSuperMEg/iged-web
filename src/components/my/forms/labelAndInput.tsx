@@ -16,6 +16,7 @@ type LabelAndInputType = FieldProps & {
   width?: string;
   mask?: string | undefined;
   isUpperCase: "uppercase" | "none";
+  onChange: any;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export function LabelAndInput({
@@ -29,6 +30,7 @@ export function LabelAndInput({
   width = "w-full",
   mask,
   isUpperCase = "uppercase",
+  onChange,
   ...rest
 }: LabelAndInputType) {
   const [showPassword, setShowPassword] = useState(false);
@@ -55,6 +57,7 @@ export function LabelAndInput({
           autoFocus={autoFocus}
           disabled={rest.disabled}
           style={{ textTransform: isUpperCase }}
+          onChange={onChange}
           // {...rest}
         />
         {type === "password" && (

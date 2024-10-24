@@ -23,7 +23,7 @@ export function MainRouter() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />}>
-              <Route path="orders" element={<Documentos />} />
+              <Route path="documentos" element={<Documentos />} />
               <Route path="orgaos" element={<UnidadeOrcamentaria />} />
               <Route path="configuracao" element={<Configuracao />} />
               <Route path="tipos-documentos" element={<TiposDocumentos />} />
